@@ -32,7 +32,13 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::OVERVIEW_ENTRY) {
                 if (!empty($overviewEntity)) {
-                    $menu_item->url = SITE_URL . '/view/overview/entry/' . $overviewEntity->id;
+                    $entryID  = $overviewEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::OVERVIEW . '"]Overview[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
                 } else {
                     $menu_item->title = '';
                     $menu_item->url   = '';
@@ -40,13 +46,14 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
                 if (!empty($marketingPlanEntity)) {
-                    $entryID = $marketingPlanEntity->id;
-                    $url     = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');
+                    $entryID  = $marketingPlanEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::MARKETING_PLAN . '"]Marketing Plan[/gv_entry_link]');
+                    $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $href = $matches[1];
+                        $viewLink = $matches[1];
                     }
                     SMPLFY_Log::info("Shortcode URL: ", $url);
-                    $menu_item->url = $href;//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
+                    $menu_item->url = $viewLink;
                 } else {
                     $menu_item->title = '';
                     $menu_item->url   = '';
