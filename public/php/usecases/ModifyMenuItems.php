@@ -2,6 +2,8 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use SmplfyCore\SMPLFY_Log;
+
 class ModifyMenuItems
 {
     private OverviewRepository      $overviewRepository;
@@ -38,9 +40,10 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
                 if (!empty($marketingPlanEntity)) {
-                    $entryID        = $marketingPlanEntity->id;
-                    $url            = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');
-                    $menu_item->url = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
+                    $entryID = $marketingPlanEntity->id;
+                    $url     = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');
+                    SMPLFY_Log::info("Shortcode URL: ", $url);
+                    $menu_item->url = $url;//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
                 } else {
                     $menu_item->title = '';
                     $menu_item->url   = '';
