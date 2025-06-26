@@ -38,7 +38,9 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
                 if (!empty($marketingPlanEntity)) {
-                    $menu_item->url = do_shortcode('[gv_entry_link entry_id="' . $marketingPlanEntity->id . '" view_id="271"]Marketing Plan[/gv_entry_link]');//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
+                    $entryID        = $marketingPlanEntity->id;
+                    $url            = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');
+                    $menu_item->url = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
                 } else {
                     $menu_item->title = '';
                     $menu_item->url   = '';
