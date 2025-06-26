@@ -42,8 +42,11 @@ class ModifyMenuItems
                 if (!empty($marketingPlanEntity)) {
                     $entryID = $marketingPlanEntity->id;
                     $url     = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="486"]Marketing Plan[/gv_entry_link]');
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $href = $matches[1];
+                    }
                     SMPLFY_Log::info("Shortcode URL: ", $url);
-                    $menu_item->url = $url;//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
+                    $menu_item->url = $href;//SITE_URL . '/view/marketing-plan/entry/' . $marketingPlanEntity->id;
                 } else {
                     $menu_item->title = '';
                     $menu_item->url   = '';
