@@ -22,10 +22,16 @@ class ModifyMenuItems
         $overviewEntity      = $this->overviewRepository->get_one_for_user($userID);
         $marketingPlanEntity = $this->marketingPlanRepository->get_one_for_user($userID);
 
+        if (!empty($overviewEntity) && !empty($marketingPlanEntity)) {
+            $startCompleted = true;
+        } else {
+            $startCompleted = false;
+        }
+
         foreach ($menu_items as $menu_item) {
 
             if ($menu_item->ID == MenuItemIDs::START) {
-                if (!empty($overviewEntity) && !empty($marketingPlanEntity)) {
+                if ($startCompleted) {
                     $menu_item->title = '';
                     $menu_item->url   = '';
                 }
@@ -44,6 +50,7 @@ class ModifyMenuItems
                     $menu_item->url   = '';
                 }
             }
+
             if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
                 if (!empty($marketingPlanEntity)) {
                     $entryID  = $marketingPlanEntity->id;
@@ -54,6 +61,19 @@ class ModifyMenuItems
                     }
                     $menu_item->url = $viewLink;
                 } else {
+                    $menu_item->title = '';
+                    $menu_item->url   = '';
+                }
+            }
+
+            if ($menu_item->ID == MenuItemIDs::ADD) {
+                if (!$startCompleted) {
+                    $menu_item->title = '';
+                    $menu_item->url   = '';
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::VIEW_UPDATE) {
+                if (!$startCompleted) {
                     $menu_item->title = '';
                     $menu_item->url   = '';
                 }

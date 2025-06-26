@@ -29,7 +29,6 @@ class UserLogin
      */
     public function handle_redirect($redirect_to, $request, $user): string
     {
-        SMPLFY_Log::info("handle_redirect triggered -------------", $user);
         $overviewEntity  = $this->overviewRepository->get_one_for_user($user->ID);
         $marketingEntity = $this->marketingPlanRepository->get_one_for_user($user->ID);
 
