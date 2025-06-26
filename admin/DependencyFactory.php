@@ -32,13 +32,14 @@ class DependencyFactory
         $invitingGuest      = new InvitingGuest($attendeeDashboardRepository, $inviteGuestRepository);
         $checkout           = new Checkout($attendeeDashboardRepository, $inviteGuestRepository);
         $userRegistered     = new UserRegistered($inviteGuestRepository);
-        $userLogin          = new UserLogin();
+        $userLogin          = new UserLogin($overviewRepository, $marketingRepository);
         $modifyMenuItems    = new ModifyMenuItems($overviewRepository, $marketingRepository);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);
         new WordpressAdapter($wpHeartbeatExample, $userLogin, $modifyMenuItems);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
+        new MemberpressAdapter($userLogin);
 
     }
 }

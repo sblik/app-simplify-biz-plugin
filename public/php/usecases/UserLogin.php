@@ -8,9 +8,13 @@ use SmplfyCore\UserActions;
 class UserLogin
 {
 
-    public function __construct()
-    {
+    private OverviewRepository      $overviewRepository;
+    private MarketingPlanRepository $marketingPlanRepository;
 
+    public function __construct(OverviewRepository $overviewRepository, MarketingPlanRepository $marketingPlanRepository)
+    {
+        $this->overviewRepository      = $overviewRepository;
+        $this->marketingPlanRepository = $marketingPlanRepository;
     }
 
     /**
@@ -24,10 +28,13 @@ class UserLogin
      */
     public function handle_redirect($redirect_to, $request, $user): string
     {
-        SMPLFY_Log::info("Mpress handle_redirect triggered -------------");
-        if (UserActions::does_user_have_role($user, 'attendee')) {
-            return '/attendee/';
+        $overviewEntity  = $this->overviewRepository->get_one_for_current_user();
+        $marketingEntity = $this->marketingPlanRepository->get_one_for_current_user();
+
+        if (!empty($overviewEntity) && !empty($marketingEntity)) {
+            return '/dashboard/';
+        } else {
+            return '/start/';
         }
-        return $redirect_to;
     }
 }
