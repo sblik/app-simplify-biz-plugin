@@ -4,6 +4,7 @@ namespace SMPLFY\appsimplifybiz;
 
 use SmplfyCore\SMPLFY_Log;
 use SmplfyCore\UserActions;
+use WP_User;
 
 class UserLogin
 {
@@ -26,11 +27,11 @@ class UserLogin
      *
      * @return void
      */
-    public function handle_redirect($redirect_to, $request, $user): string
+    public function handle_redirect($redirect_to, $request, WP_User $user): string
     {
         SMPLFY_Log::info("handle_redirect triggered -------------");
-        $overviewEntity  = $this->overviewRepository->get_one_for_current_user();
-        $marketingEntity = $this->marketingPlanRepository->get_one_for_current_user();
+        $overviewEntity  = $this->overviewRepository->get_one_for_user($user->ID);
+        $marketingEntity = $this->marketingPlanRepository->get_one_for_user($user->ID);
 
         if (!empty($overviewEntity) && !empty($marketingEntity)) {
 

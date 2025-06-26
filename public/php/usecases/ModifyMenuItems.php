@@ -52,7 +52,6 @@ class ModifyMenuItems
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                         $viewLink = $matches[1];
                     }
-                    SMPLFY_Log::info("Shortcode URL: ", $url);
                     $menu_item->url = $viewLink;
                 } else {
                     $menu_item->title = '';
