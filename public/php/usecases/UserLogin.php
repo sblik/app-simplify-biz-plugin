@@ -32,11 +32,16 @@ class UserLogin
         $overviewEntity  = $this->overviewRepository->get_one_for_user($user->ID);
         $marketingEntity = $this->marketingPlanRepository->get_one_for_user($user->ID);
 
-        if (!empty($overviewEntity) && !empty($marketingEntity)) {
+        if (UserActions::does_user_have_role($user, 'administrator')) {
+            return '/wp-admin';
+        }
 
+        if (!empty($overviewEntity) && !empty($marketingEntity)) {
             return '/dashboard/';
         } else {
             return '/start/';
         }
+
+
     }
 }
