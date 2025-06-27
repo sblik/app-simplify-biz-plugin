@@ -27,7 +27,7 @@ class UserLogin
      *
      * @return void
      */
-    public function handle_redirect($redirect_to, $request, $user): string
+    public function handle_redirect($redirect_to, $user): string
     {
         $overviewEntity  = $this->overviewRepository->get_one_for_user($user->ID);
         $marketingEntity = $this->marketingPlanRepository->get_one_for_user($user->ID);
