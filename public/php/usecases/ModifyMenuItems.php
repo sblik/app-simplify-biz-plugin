@@ -8,11 +8,13 @@ class ModifyMenuItems
 {
     private OverviewRepository      $overviewRepository;
     private MarketingPlanRepository $marketingPlanRepository;
+    private DoItemsRepository       $doItemsRepository;
 
-    public function __construct(OverviewRepository $overviewRepository, MarketingPlanRepository $marketingPlanRepository)
+    public function __construct(OverviewRepository $overviewRepository, MarketingPlanRepository $marketingPlanRepository, DoItemsRepository $doItemsRepository)
     {
         $this->overviewRepository      = $overviewRepository;
         $this->marketingPlanRepository = $marketingPlanRepository;
+        $this->doItemsRepository       = $doItemsRepository;
     }
 
     function modify_menu_items($menu_items)
@@ -21,6 +23,7 @@ class ModifyMenuItems
 
         $overviewEntity      = $this->overviewRepository->get_one_for_user($userID);
         $marketingPlanEntity = $this->marketingPlanRepository->get_one_for_user($userID);
+        $doItemsEntity       = $this->doItemsRepository->get_one_for_user($userID);
 
         if (!empty($overviewEntity) && !empty($marketingPlanEntity)) {
             $startCompleted = true;
@@ -55,6 +58,21 @@ class ModifyMenuItems
                 if (!empty($marketingPlanEntity)) {
                     $entryID  = $marketingPlanEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::MARKETING_PLAN . '"]Marketing Plan[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                } else {
+                    $menu_item->title = '';
+                    $menu_item->url   = '';
+                }
+            }
+
+            if ($menu_item->ID == MenuItemIDs::DO_ITEMS) {
+                if (!empty($doItemsEntity)) {
+                    $entryID  = $doItemsEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::DO_ITEMS . '"]Do Items[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                         $viewLink = $matches[1];

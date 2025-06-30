@@ -11,4 +11,6 @@ class MenuItemIDs
     const SOLOPRENEUR          = 565;
     const OVERVIEW_ENTRY       = 100640;
     const MARKETING_PLAN_ENTRY = 100641;
+    const DO_ITEMS             = 10067;
+   
 }
