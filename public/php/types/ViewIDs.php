@@ -4,7 +4,7 @@ namespace SMPLFY\appsimplifybiz;
 
 class ViewIDs
 {
-    const MARKETING_PLAN = 486;
-    const OVERVIEW       = 271;
-    const DO_ITEMS       = 512;
+    const MARKETING_PROCESS = 486;
+    const STRATEGY          = 271;
+    const TASKS             = 512;
 }

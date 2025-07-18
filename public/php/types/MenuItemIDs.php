@@ -9,8 +9,11 @@ class MenuItemIDs
     const VIEW_UPDATE          = 100632;
     const USER                 = 408;
     const SOLOPRENEUR          = 565;
-    const OVERVIEW_ENTRY       = 100640;
+    const STRATEGY             = 100640;
     const MARKETING_PLAN_ENTRY = 100641;
-    const DO_ITEMS             = 10067;
-   
+    const TASKS                = 100670;
+    const MARKETING_PROCESS    = 100737;
+    const PROCESS              = 100736;
+
+
 }
