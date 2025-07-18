@@ -25,7 +25,7 @@ use SmplfyCore\SMPLFY_BaseEntity;
  * @property $actionsStepsDetails
  * @property $status
  */
-class MarketingPlanEntity extends SMPLFY_BaseEntity
+class MarketingProcessEntity extends SMPLFY_BaseEntity
 {
     public function __construct($formEntry = array())
     {

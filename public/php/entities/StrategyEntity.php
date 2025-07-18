@@ -21,7 +21,7 @@ use SmplfyCore\SMPLFY_BaseEntity;
  * @property $systemsNameFirst
  * @property $systemsNameLast
  */
-class OverviewEntity extends SMPLFY_BaseEntity
+class StrategyEntity extends SMPLFY_BaseEntity
 {
     public function __construct($formEntry = array())
     {

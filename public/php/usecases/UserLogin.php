@@ -9,13 +9,14 @@ use WP_User;
 class UserLogin
 {
 
-    private OverviewRepository      $overviewRepository;
-    private MarketingPlanRepository $marketingPlanRepository;
+    private StrategyRepository $strategyRepository;
 
-    public function __construct(OverviewRepository $overviewRepository, MarketingPlanRepository $marketingPlanRepository)
+    private MarketingProcessRepository $marketingProcessRepository;
+
+    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository)
     {
-        $this->overviewRepository      = $overviewRepository;
-        $this->marketingPlanRepository = $marketingPlanRepository;
+        $this->strategyRepository         = $strategyRepository;
+        $this->marketingProcessRepository = $marketingProcessRepository;
     }
 
     /**
@@ -29,14 +30,14 @@ class UserLogin
      */
     public function handle_redirect($redirect_to, $user): string
     {
-        $overviewEntity  = $this->overviewRepository->get_one_for_user($user->ID);
-        $marketingEntity = $this->marketingPlanRepository->get_one_for_user($user->ID);
+        $strategyEntity  = $this->strategyRepository->get_one_for_user($user->ID);
+        $marketingEntity = $this->marketingProcessRepository->get_one_for_user($user->ID);
 
         if (UserActions::does_user_have_role($user, 'administrator')) {
             return '/wp-admin';
         }
 
-        if (!empty($overviewEntity) && !empty($marketingEntity)) {
+        if (!empty($strategyEntity) && !empty($marketingEntity)) {
             return '/dashboard/';
         } else {
             return '/start/';

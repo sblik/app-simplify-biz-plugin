@@ -23,9 +23,9 @@ class DependencyFactory
         $attendeeDashboardRepository = new AttendeeDashboardRepository($gravityFormsWrapper);
         $inviteGuestRepository       = new InviteGuestRepeaterRepository($gravityFormsWrapper);
         $inviteGuestParentRepository = new InviteGuestParentRepository($gravityFormsWrapper);
-        $overviewRepository          = new OverviewRepository($gravityFormsWrapper);
-        $marketingRepository         = new MarketingPlanRepository($gravityFormsWrapper);
-        $doItemsRepository           = new DoItemsRepository($gravityFormsWrapper);
+        $strategyRepository          = new StrategyRepository($gravityFormsWrapper);
+        $marketingRepository         = new MarketingProcessRepository($gravityFormsWrapper);
+        $tasksRepository             = new TasksRepository($gravityFormsWrapper);
         //Usecases
         $exampleUsecase     = new ExampleUsecase($attendeeDashboardRepository);
         $wpHeartbeatExample = new WPHeartbeatExample($attendeeDashboardRepository);
@@ -33,8 +33,8 @@ class DependencyFactory
         $invitingGuest      = new InvitingGuest($attendeeDashboardRepository, $inviteGuestRepository);
         $checkout           = new Checkout($attendeeDashboardRepository, $inviteGuestRepository);
         $userRegistered     = new UserRegistered($inviteGuestRepository);
-        $userLogin          = new UserLogin($overviewRepository, $marketingRepository);
-        $modifyMenuItems    = new ModifyMenuItems($overviewRepository, $marketingRepository, $doItemsRepository);
+        $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
+        $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);

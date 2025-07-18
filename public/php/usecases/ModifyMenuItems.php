@@ -6,26 +6,26 @@ use SmplfyCore\SMPLFY_Log;
 
 class ModifyMenuItems
 {
-    private OverviewRepository      $overviewRepository;
-    private MarketingPlanRepository $marketingPlanRepository;
-    private DoItemsRepository       $doItemsRepository;
+    private StrategyRepository         $strategyRepository;
+    private MarketingProcessRepository $marketingPlanRepository;
+    private TasksRepository            $tasksRepository;
 
-    public function __construct(OverviewRepository $overviewRepository, MarketingPlanRepository $marketingPlanRepository, DoItemsRepository $doItemsRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingPlanRepository, TasksRepository $tasksRepository)
     {
-        $this->overviewRepository      = $overviewRepository;
+        $this->strategyRepository      = $strategyRepository;
         $this->marketingPlanRepository = $marketingPlanRepository;
-        $this->doItemsRepository       = $doItemsRepository;
+        $this->tasksRepository         = $tasksRepository;
     }
 
     function modify_menu_items($menu_items)
     {
         $userID = get_current_user_id();
 
-        $overviewEntity      = $this->overviewRepository->get_one_for_user($userID);
+        $strategyEntity      = $this->strategyRepository->get_one_for_user($userID);
         $marketingPlanEntity = $this->marketingPlanRepository->get_one_for_user($userID);
-        $doItemsEntity       = $this->doItemsRepository->get_one_for_user($userID);
+        $tasksEntity         = $this->tasksRepository->get_one_for_user($userID);
 
-        if (!empty($overviewEntity) && !empty($marketingPlanEntity)) {
+        if (!empty($strategyEntity) && !empty($marketingPlanEntity)) {
             $startCompleted = true;
         } else {
             $startCompleted = false;
@@ -40,8 +40,8 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::OVERVIEW_ENTRY) {
-                if (!empty($overviewEntity)) {
-                    $entryID  = $overviewEntity->id;
+                if (!empty($strategyEntity)) {
+                    $entryID  = $strategyEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::OVERVIEW . '"]Overview[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
@@ -70,8 +70,8 @@ class ModifyMenuItems
             }
 
             if ($menu_item->ID == MenuItemIDs::DO_ITEMS) {
-                if (!empty($doItemsEntity)) {
-                    $entryID  = $doItemsEntity->id;
+                if (!empty($tasksEntity)) {
+                    $entryID  = $tasksEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::DO_ITEMS . '"]Do Items[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
