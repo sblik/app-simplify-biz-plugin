@@ -7,14 +7,14 @@ use SmplfyCore\SMPLFY_Log;
 class ModifyMenuItems
 {
     private StrategyRepository         $strategyRepository;
-    private MarketingProcessRepository $marketingPlanRepository;
+    private MarketingProcessRepository $marketingProcessRepository;
     private TasksRepository            $tasksRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingPlanRepository, TasksRepository $tasksRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository)
     {
-        $this->strategyRepository      = $strategyRepository;
-        $this->marketingPlanRepository = $marketingPlanRepository;
-        $this->tasksRepository         = $tasksRepository;
+        $this->strategyRepository         = $strategyRepository;
+        $this->marketingProcessRepository = $marketingProcessRepository;
+        $this->tasksRepository            = $tasksRepository;
     }
 
     function modify_menu_items($menu_items)
@@ -22,7 +22,7 @@ class ModifyMenuItems
         $userID = get_current_user_id();
 
         $strategyEntity      = $this->strategyRepository->get_one_for_user($userID);
-        $marketingPlanEntity = $this->marketingPlanRepository->get_one_for_user($userID);
+        $marketingPlanEntity = $this->marketingProcessRepository->get_one_for_user($userID);
         $tasksEntity         = $this->tasksRepository->get_one_for_user($userID);
 
         if (!empty($strategyEntity) && !empty($marketingPlanEntity)) {
