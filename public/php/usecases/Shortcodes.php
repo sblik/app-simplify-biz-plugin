@@ -45,7 +45,8 @@ class Shortcodes
 
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
         } else {
-            return "<a href='/strategy' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
+            $url = SITE_URL . '/start/?id=67';
+            return "<a href='$url' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
         }
     }
 
@@ -76,7 +77,9 @@ class Shortcodes
 
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
         } else {
-            return "<a href='/strategy' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
+            $url = SITE_URL . '/start/?id=80';
+
+            return "<a href='$url' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
         }
     }
 
