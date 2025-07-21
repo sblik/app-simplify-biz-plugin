@@ -118,6 +118,12 @@ class ModifyMenuItems
                     $menu_item->url   = '';
                 }
             }
+            if ($menu_item->ID == MenuItemIDs::ACTION_STEPS) {
+                if (empty($strategyEntity)) {
+                    $menu_item->title = '';
+                    $menu_item->url   = '';
+                }
+            }
         }
 
 
