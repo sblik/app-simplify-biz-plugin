@@ -46,5 +46,6 @@ class WordpressAdapter
     public function register_shortcodes()
     {
         add_shortcode('smplfy_strategy_link_shortcode', [$this->shortcodes, 'strategy_link_shortcode']);
+        add_shortcode('smplfy_marketing_link_shortcode', [$this->shortcodes, 'marketing_plan_link_shortcode']);
     }
 }

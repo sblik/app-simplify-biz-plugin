@@ -35,7 +35,7 @@ class DependencyFactory
         $userRegistered     = new UserRegistered($inviteGuestRepository);
         $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
         $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository);
-        $shortcodes         = new Shortcodes($strategyRepository);
+        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);

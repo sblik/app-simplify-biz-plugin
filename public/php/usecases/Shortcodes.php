@@ -6,12 +6,17 @@ use SmplfyCore\SMPLFY_Log;
 
 class Shortcodes
 {
-    private StrategyRepository $strategyRepository;
+    private StrategyRepository         $strategyRepository;
+    private MarketingProcessRepository $marketingProcessRepository;
+    private TasksRepository            $tasksRepository;
 
-    public function __construct(StrategyRepository $strategyRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository)
     {
-        $this->strategyRepository = $strategyRepository;
+        $this->strategyRepository         = $strategyRepository;
+        $this->marketingProcessRepository = $marketingProcessRepository;
+        $this->tasksRepository            = $tasksRepository;
     }
+
 
     /**
      * @param $atts
@@ -26,24 +31,53 @@ class Shortcodes
 
 
         $userID         = get_current_user_id();
-        $user           = get_user_by('ID', $userID);
         $strategyEntity = $this->strategyRepository->get_one_for_user($userID);
 
-        $url   = do_shortcode('[gv_entry_link entry_id="' . $strategyEntity->id . '" view_id="' . ViewIDs::STRATEGY . '"]Overview[/gv_entry_link]');
+        $url   = do_shortcode('[gv_entry_link entry_id="' . $strategyEntity->id . '" view_id="' . ViewIDs::STRATEGY . '"]Strategy[/gv_entry_link]');
         $class = esc_attr($atts['class']);
 
-        SMPLFY_Log::info("Strategy Entity: ", $strategyEntity);
 
         if (!empty($strategyEntity)) {
             $viewLink = '';
             if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                 $viewLink = $matches[1];
             }
-            SMPLFY_Log::info("View Link: ", $viewLink);
 
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
         } else {
             return "<a href='/strategy' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
         }
     }
+
+    /**
+     * @param $atts
+     * @return string|null
+     */
+    function marketing_plan_link_shortcode($atts)
+    {
+        // Define default attributes and allow overrides
+        $atts = shortcode_atts([
+            'class' => '',
+        ], $atts, 'smplfy_marketing_link_shortcode');
+
+
+        $userID                 = get_current_user_id();
+        $marketingProcessEntity = $this->marketingProcessRepository->get_one_for_user($userID);
+
+        $url   = do_shortcode('[gv_entry_link entry_id="' . $marketingProcessEntity->id . '" view_id="' . ViewIDs::MARKETING_PROCESS . '"]Marketing[/gv_entry_link]');
+        $class = esc_attr($atts['class']);
+
+
+        if (!empty($marketingProcessEntity)) {
+            $viewLink = '';
+            if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                $viewLink = $matches[1];
+            }
+
+            return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
+        } else {
+            return "<a href='/strategy' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
+        }
+    }
+
 }
