@@ -20,7 +20,7 @@ function enqueue_appsimplifybiz_frontend_scripts()
     ), null, true);
 
     wp_register_script('smplfy-demo-frontend-script', SMPLFY_NAME_PLUGIN_URL . 'public/js/frontend.js', array('jquery'), null, true);
-    wp_register_style('smplfy-demo-frontend-styles', SMPLFY_NAME_PLUGIN_URL . 'public/css/frontend.css');
+    wp_register_style('smplfy-frontend-styles', SMPLFY_NAME_PLUGIN_URL . 'public/css/frontend.css');
 
     wp_enqueue_script('smplfy-demo-frontend-script');
     //Ensure our heartbeat script only runs on the page we want it to, to avoid excessive computation on the client side
