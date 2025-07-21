@@ -2,6 +2,8 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use SmplfyCore\SMPLFY_Log;
+
 class Shortcodes
 {
     private StrategyRepository $strategyRepository;
@@ -30,15 +32,15 @@ class Shortcodes
         $url   = do_shortcode('[gv_entry_link entry_id="' . $strategyEntity->id . '" view_id="' . ViewIDs::STRATEGY . '"]Overview[/gv_entry_link]');
         $class = esc_attr($atts['class']);
 
+        SMPLFY_Log::info("Strategy Entity: ", $strategyEntity);
 
-        if (!empty($exhibitorRegistrationEntity)) {
-            $registrationEntityID = $exhibitorRegistrationEntity->id;
-
-            $editEntryViewShortcode = '[gv_entry_link action="edit" entry_id="' . $registrationEntityID . '" view_id="417" ]View and Edit Exhibitor Information[/gv_entry_link]';
-            $viewLink               = '';
+        if (!empty($strategyEntity)) {
+            $viewLink = '';
             if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                 $viewLink = $matches[1];
             }
+            SMPLFY_Log::info("View Link: ", $viewLink);
+
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
         } else {
             return "<a href='/strategy' class='smplfy-heading-link smplfy-bg_strategy'><i class='fa-sharp fa-solid  fa-compass'></i> <h3>Strategy</h3></a>";
