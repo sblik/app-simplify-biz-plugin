@@ -35,10 +35,11 @@ class DependencyFactory
         $userRegistered     = new UserRegistered($inviteGuestRepository);
         $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
         $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository);
+        $shortcodes         = new Shortcodes($strategyRepository);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);
-        new WordpressAdapter($wpHeartbeatExample, $userLogin, $modifyMenuItems);
+        new WordpressAdapter($wpHeartbeatExample, $userLogin, $modifyMenuItems, $shortcodes);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin);
 
