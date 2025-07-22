@@ -142,7 +142,7 @@ class Shortcodes
         if (empty($fontawesome)) {
             $fontawesome = 'fa-solid fa-handshake';
         }
-        
+
         if (!empty($form)) {
             if ($form == 'strategy') {
                 $strategyEntity = $this->strategyRepository->get_one_for_user($userID);
@@ -154,7 +154,7 @@ class Shortcodes
                         $viewLink = $matches[1];
                     }
                     //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
-                    return "<a href='$viewLink' class=''$class''><i class=''$fontawesome''></i> <h3>Strategy</h3></a>";
+                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Strategy</h3></a>";
                 } else {
                     $url = SITE_URL . '/start/?id=67';
                     return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Strategy</h3></a>";
