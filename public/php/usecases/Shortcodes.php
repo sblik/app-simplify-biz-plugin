@@ -78,6 +78,7 @@ class Shortcodes
 
     /**
      * @param int $viewID
+     * @param array $entity
      * @param $matches
      * @param string|null $class
      * @param string|null $fontawesome
@@ -85,7 +86,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output($entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
