@@ -79,7 +79,7 @@ class Shortcodes
 
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
         } else {
-            $url = SITE_URL . '/start/?id=91';
+            $url = SITE_URL . '/start/?id=80';
 
             return "<a href='$url' class='smplfy-heading-link smplfy-bg_marketing'><i class='fa-sharp fa-solid  fa-megaphone'></i> <h3>Marketing</h3></a>";
         }
@@ -112,7 +112,7 @@ class Shortcodes
 
             return "<a href='$viewLink' class='smplfy-heading-link smplfy-bg_sales'><i class='fa-solid fa-handshake'></i> <h3>Sales</h3></a>";
         } else {
-            $url = SITE_URL . '/start/?id=67';
+            $url = SITE_URL . '/start/?id=91';
             return "<a href='$url' class='smplfy-heading-link smplfy-bg_sales'><i class='fa-solid fa-handshake'></i> <h3>Sales</h3></a>>";
         }
     }
