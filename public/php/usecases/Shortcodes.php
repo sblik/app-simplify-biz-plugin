@@ -9,12 +9,14 @@ class Shortcodes
     private StrategyRepository         $strategyRepository;
     private MarketingProcessRepository $marketingProcessRepository;
     private TasksRepository            $tasksRepository;
+    private ProcessSalesRepository     $processSalesRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository, ProcessSalesRepository $processSalesRepository)
     {
         $this->strategyRepository         = $strategyRepository;
         $this->marketingProcessRepository = $marketingProcessRepository;
         $this->tasksRepository            = $tasksRepository;
+        $this->processSalesRepository     = $processSalesRepository;
     }
 
 
@@ -95,10 +97,10 @@ class Shortcodes
         ], $atts, 'smplfy_sales_link_shortcode');
 
 
-        $userID         = get_current_user_id();
-        $strategyEntity = $this->strategyRepository->get_one_for_user($userID);
+        $userID             = get_current_user_id();
+        $processSalesEntity = $this->processSalesRepository->get_one_for_user($userID);
 
-        $url   = do_shortcode('[gv_entry_link entry_id="' . $strategyEntity->id . '" view_id="' . ViewIDs::STRATEGY . '"]Strategy[/gv_entry_link]');
+        $url   = do_shortcode('[gv_entry_link entry_id="' . $processSalesEntity->id . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
         $class = esc_attr($atts['class']);
 
 
