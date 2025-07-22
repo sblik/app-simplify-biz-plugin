@@ -142,7 +142,7 @@ class Shortcodes
         if (empty($fontawesome)) {
             $fontawesome = 'fa-solid fa-handshake';
         }
-
+        
         if (!empty($form)) {
             if ($form == 'strategy') {
                 $strategyEntity = $this->strategyRepository->get_one_for_user($userID);
@@ -154,10 +154,10 @@ class Shortcodes
                         $viewLink = $matches[1];
                     }
                     //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
-                    return "<a href='$viewLink' class=$class><i class=$fontawesome></i> <h3>Strategy</h3></a>";
+                    return "<a href='$viewLink' class=''$class''><i class=''$fontawesome''></i> <h3>Strategy</h3></a>";
                 } else {
                     $url = SITE_URL . '/start/?id=67';
-                    return "<a href='$url' class=$class><i class=$fontawesome></i> <h3>Strategy</h3></a>";
+                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Strategy</h3></a>";
                 }
             }
             if ($form == 'marketing') {
@@ -171,28 +171,28 @@ class Shortcodes
                         $viewLink = $matches[1];
                     }
                     // 'smplfy-heading-link smplfy-bg_marketing' 'fa-sharp fa-solid  fa-megaphone'
-                    return "<a href='$viewLink' class=$class><i class=$fontawesome></i> <h3>Marketing</h3></a>";
+                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Marketing</h3></a>";
                 } else {
                     $url = SITE_URL . '/start/?id=80';
 
-                    return "<a href='$url' class=$class><i class=$fontawesome></i> <h3>Marketing</h3></a>";
+                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Marketing</h3></a>";
                 }
             }
             if ($form == 'sales') {
                 $processSalesEntity = $this->processSalesRepository->get_one_for_user($userID);
 
                 $url = do_shortcode('[gv_entry_link entry_id="' . $processSalesEntity->id . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
-                
+
                 if (!empty($processSalesEntity)) {
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                         $viewLink = $matches[1];
                     }
                     // 'smplfy-heading-link smplfy-bg_sales' 'fa-solid fa-handshake'
-                    return "<a href='$viewLink' class=$class><i class=$fontawesome></i> <h3>Sales</h3></a>";
+                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Sales</h3></a>";
                 } else {
                     $url = SITE_URL . '/start/?id=91';
-                    return "<a href='$url' class=$class><i class=$fontawesome></i> <h3>Sales</h3></a>>";
+                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Sales</h3></a>>";
                 }
             }
         }
