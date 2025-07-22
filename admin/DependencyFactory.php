@@ -26,6 +26,7 @@ class DependencyFactory
         $strategyRepository          = new StrategyRepository($gravityFormsWrapper);
         $marketingRepository         = new MarketingProcessRepository($gravityFormsWrapper);
         $tasksRepository             = new TasksRepository($gravityFormsWrapper);
+        $processSalesRepository      = new ProcessSalesRepository($gravityFormsWrapper);
         //Usecases
         $exampleUsecase     = new ExampleUsecase($attendeeDashboardRepository);
         $wpHeartbeatExample = new WPHeartbeatExample($attendeeDashboardRepository);
@@ -34,7 +35,7 @@ class DependencyFactory
         $checkout           = new Checkout($attendeeDashboardRepository, $inviteGuestRepository);
         $userRegistered     = new UserRegistered($inviteGuestRepository);
         $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
-        $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository);
+        $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
         $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository);
 
 

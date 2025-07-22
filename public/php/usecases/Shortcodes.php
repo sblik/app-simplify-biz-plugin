@@ -65,7 +65,7 @@ class Shortcodes
         $userID                 = get_current_user_id();
         $marketingProcessEntity = $this->marketingProcessRepository->get_one_for_user($userID);
 
-        $url   = do_shortcode('[gv_entry_link entry_id="' . $marketingProcessEntity->id . '" view_id="' . ViewIDs::MARKETING_PROCESS . '"]Marketing[/gv_entry_link]');
+        $url   = do_shortcode('[gv_entry_link entry_id="' . $marketingProcessEntity->id . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Marketing[/gv_entry_link]');
         $class = esc_attr($atts['class']);
 
 

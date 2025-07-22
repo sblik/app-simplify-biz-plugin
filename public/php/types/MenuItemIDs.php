@@ -15,6 +15,7 @@ class MenuItemIDs
     const MARKETING_PROCESS    = 100737;
     const PROCESS              = 100736;
     const ACTION_STEPS         = 100673;
+    const PROCESS_SALES        = 100868;
 
 
 }
