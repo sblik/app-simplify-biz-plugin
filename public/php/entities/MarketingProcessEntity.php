@@ -30,7 +30,7 @@ class MarketingProcessEntity extends SMPLFY_BaseEntity
     public function __construct($formEntry = array())
     {
         parent::__construct($formEntry);
-        $this->formId = FormIds::MARKETING_PLAN;
+        $this->formId = FormIds::PROCESS_MARKETING;
     }
 
     protected function get_property_map(): array

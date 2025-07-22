@@ -21,7 +21,7 @@ class MarketingProcessRepository extends SMPLFY_BaseRepository
     public function __construct(SMPLFY_GravityFormsApiWrapper $gravityFormsApi)
     {
         $this->entityType = MarketingProcessEntity::class;
-        $this->formId     = FormIds::MARKETING_PLAN;
+        $this->formId     = FormIds::PROCESS_MARKETING;
 
         parent::__construct($gravityFormsApi);
     }
