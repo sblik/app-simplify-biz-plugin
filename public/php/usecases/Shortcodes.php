@@ -104,7 +104,7 @@ class Shortcodes
         $class = esc_attr($atts['class']);
 
 
-        if (!empty($strategyEntity)) {
+        if (!empty($processSalesEntity)) {
             $viewLink = '';
             if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                 $viewLink = $matches[1];
