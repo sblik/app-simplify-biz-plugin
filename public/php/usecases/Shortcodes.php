@@ -90,7 +90,7 @@ class Shortcodes
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
-                return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+                return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
             }
 
             $url      = do_shortcode('[gv_entry_link entry_id="' . $entity->id . '" view_id="' . $viewID . '"]Strategy[/gv_entry_link]');
@@ -102,7 +102,7 @@ class Shortcodes
             return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
         } else {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
-                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
             }
             $url = SITE_URL . '/start/?id=' . $formID;
             return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
