@@ -129,8 +129,7 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::PROCESS_SALES) {
                 if (empty($processSalesEntity)) {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
+                    $menu_item->url = SITE_URL . '/start/?id=91';
                 } else {
                     $entryID  = $processSalesEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
