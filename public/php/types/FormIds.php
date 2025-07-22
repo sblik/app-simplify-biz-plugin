@@ -6,11 +6,12 @@
 namespace SMPLFY\appsimplifybiz;
 class FormIds
 {
-    const STRATEGY              = 67;
-    const PROCESS_MARKETING     = 80;
-    const DO_ITEMS              = 81;
-    const INVITE_GUEST_REPEATER = 33;
-    const PROCESS_SALES         = 91;
-    const ATTENDEE_DASHBOARD    = 999;
-    const INVITE_GUEST_PARENT   = 999;
+    const STRATEGY               = 67;
+    const PROCESS_MARKETING      = 80;
+    const DO_ITEMS               = 81;
+    const INVITE_GUEST_REPEATER  = 33;
+    const PROCESS_SALES          = 91;
+    const TARGET_MARKET_REPEATER = 70;
+    const ATTENDEE_DASHBOARD     = 999;
+    const INVITE_GUEST_PARENT    = 999;
 }

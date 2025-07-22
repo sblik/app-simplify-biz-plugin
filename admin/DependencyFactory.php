@@ -20,13 +20,14 @@ class DependencyFactory
         $gravityFormsWrapper = new SMPLFY_GravityFormsApiWrapper();
 
         // Repositories
-        $attendeeDashboardRepository = new AttendeeDashboardRepository($gravityFormsWrapper);
-        $inviteGuestRepository       = new InviteGuestRepeaterRepository($gravityFormsWrapper);
-        $inviteGuestParentRepository = new InviteGuestParentRepository($gravityFormsWrapper);
-        $strategyRepository          = new StrategyRepository($gravityFormsWrapper);
-        $marketingRepository         = new MarketingProcessRepository($gravityFormsWrapper);
-        $tasksRepository             = new TasksRepository($gravityFormsWrapper);
-        $processSalesRepository      = new ProcessSalesRepository($gravityFormsWrapper);
+        $attendeeDashboardRepository    = new AttendeeDashboardRepository($gravityFormsWrapper);
+        $inviteGuestRepository          = new InviteGuestRepeaterRepository($gravityFormsWrapper);
+        $inviteGuestParentRepository    = new InviteGuestParentRepository($gravityFormsWrapper);
+        $strategyRepository             = new StrategyRepository($gravityFormsWrapper);
+        $marketingRepository            = new MarketingProcessRepository($gravityFormsWrapper);
+        $tasksRepository                = new TasksRepository($gravityFormsWrapper);
+        $processSalesRepository         = new ProcessSalesRepository($gravityFormsWrapper);
+        $targetMarketRepeaterRepository = new TargetMarketRepeaterRepository($gravityFormsWrapper);
         //Usecases
         $exampleUsecase     = new ExampleUsecase($attendeeDashboardRepository);
         $wpHeartbeatExample = new WPHeartbeatExample($attendeeDashboardRepository);
@@ -36,7 +37,7 @@ class DependencyFactory
         $userRegistered     = new UserRegistered($inviteGuestRepository);
         $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
         $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
-        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
+        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);
