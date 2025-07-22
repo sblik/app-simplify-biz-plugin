@@ -21,7 +21,7 @@ class StrategyRepository extends SMPLFY_BaseRepository
     public function __construct(SMPLFY_GravityFormsApiWrapper $gravityFormsApi)
     {
         $this->entityType = StrategyEntity::class;
-        $this->formId     = FormIds::OVERVIEW;
+        $this->formId     = FormIds::STRATEGY;
 
         parent::__construct($gravityFormsApi);
     }

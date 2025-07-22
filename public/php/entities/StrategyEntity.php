@@ -26,7 +26,7 @@ class StrategyEntity extends SMPLFY_BaseEntity
     public function __construct($formEntry = array())
     {
         parent::__construct($formEntry);
-        $this->formId = FormIds::OVERVIEW;
+        $this->formId = FormIds::STRATEGY;
     }
 
     protected function get_property_map(): array

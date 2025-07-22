@@ -136,6 +136,9 @@ class Shortcodes
         $fontawesome = esc_attr($atts['fontawesome']);
         $userID      = get_current_user_id();
 
+        $capitalisedFormName = ucfirst(strtolower($form));
+
+
         if (empty($class)) {
             $class = 'smplfy-heading-link';
         }
@@ -145,58 +148,50 @@ class Shortcodes
 
         if (!empty($form)) {
             if ($form == 'strategy') {
-                $strategyEntity = $this->strategyRepository->get_one_for_user($userID);
-
-                $url = do_shortcode('[gv_entry_link entry_id="' . $strategyEntity->id . '" view_id="' . ViewIDs::STRATEGY . '"]Strategy[/gv_entry_link]');
-                if (!empty($strategyEntity)) {
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
-                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Strategy</h3></a>";
-                } else {
-                    $url = SITE_URL . '/start/?id=67';
-                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Strategy</h3></a>";
-                }
+                $entity = $this->strategyRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::STRATEGY;
+                $formID = FormIds::STRATEGY;
             }
             if ($form == 'marketing') {
-                $marketingProcessEntity = $this->marketingProcessRepository->get_one_for_user($userID);
-
-                $url = do_shortcode('[gv_entry_link entry_id="' . $marketingProcessEntity->id . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Marketing[/gv_entry_link]');
-
-                if (!empty($marketingProcessEntity)) {
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    // 'smplfy-heading-link smplfy-bg_marketing' 'fa-sharp fa-solid  fa-megaphone'
-                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Marketing</h3></a>";
-                } else {
-                    $url = SITE_URL . '/start/?id=80';
-
-                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Marketing</h3></a>";
-                }
+                $entity = $this->marketingProcessRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_MARKETING;
+                $formID = FormIds::MARKETING_PLAN;
             }
             if ($form == 'sales') {
-                $processSalesEntity = $this->processSalesRepository->get_one_for_user($userID);
-
-                $url = do_shortcode('[gv_entry_link entry_id="' . $processSalesEntity->id . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
-
-                if (!empty($processSalesEntity)) {
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    // 'smplfy-heading-link smplfy-bg_sales' 'fa-solid fa-handshake'
-                    return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>Sales</h3></a>";
-                } else {
-                    $url = SITE_URL . '/start/?id=91';
-                    return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Sales</h3></a>>";
-                }
+                $entity = $this->processSalesRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_SALES;
+                $formID = FormIds::PROCESS_SALES;
             }
+            return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
         }
         return null;
+    }
+
+    /**
+     * @param MarketingProcessEntity|ProcessSalesEntity|StrategyEntity|null $entity
+     * @param int $viewID
+     * @param $matches
+     * @param string|null $class
+     * @param string|null $fontawesome
+     * @param string $capitalisedFormName
+     * @param int $formID
+     * @return string
+     */
+    public function handle_output(MarketingProcessEntity|ProcessSalesEntity|StrategyEntity|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    {
+        if (!empty($entity)) {
+            $url      = do_shortcode('[gv_entry_link entry_id="' . $entity->id . '" view_id="' . $viewID . '"]Strategy[/gv_entry_link]');
+            $viewLink = '';
+            if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                $viewLink = $matches[1];
+            }
+            //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
+            return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+        } else {
+            $url = SITE_URL . '/start/?id=' . $formID;
+            return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+        }
+        return $matches;
     }
 
 }
