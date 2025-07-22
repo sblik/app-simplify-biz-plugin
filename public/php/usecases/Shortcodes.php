@@ -77,7 +77,6 @@ class Shortcodes
     }
 
     /**
-     * @param MarketingProcessEntity|ProcessSalesEntity|StrategyEntity|null $entity
      * @param int $viewID
      * @param $matches
      * @param string|null $class
@@ -86,7 +85,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingProcessEntity|ProcessSalesEntity|StrategyEntity|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
