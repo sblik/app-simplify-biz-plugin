@@ -11,14 +11,32 @@ class Shortcodes
     private TasksRepository                $tasksRepository;
     private ProcessSalesRepository         $processSalesRepository;
     private TargetMarketRepeaterRepository $targetMarketRepeaterRepository;
+    private OperationsRepository           $operationsRepository;
+    private PeopleRepository               $peopleRepository;
+    private MoneyRepository                $moneyRepository;
+    private ResearchDevelopmentRepository  $researchDevelopmentRepository;
+    private LeadershipRepository           $leadershipRepository;
+    private LegalRepository                $legalRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository, ProcessSalesRepository $processSalesRepository, TargetMarketRepeaterRepository $targetMarketRepeaterRepository)
+    public function __construct(StrategyRepository            $strategyRepository,
+                                MarketingProcessRepository    $marketingProcessRepository, TasksRepository $tasksRepository,
+                                                              $processSalesRepository, TargetMarketRepeaterRepository $targetMarketRepeaterRepository, OperationsRepository $operationsRepository,
+                                PeopleRepository              $peopleRepository,
+                                MoneyRepository               $moneyRepository,
+                                ResearchDevelopmentRepository $researchDevelopmentRepository,
+                                LeadershipRepository          $leadershipRepository,
+                                LegalRepository               $legalRepository)
     {
-        $this->strategyRepository             = $strategyRepository;
-        $this->marketingProcessRepository     = $marketingProcessRepository;
-        $this->tasksRepository                = $tasksRepository;
-        $this->processSalesRepository         = $processSalesRepository;
-        $this->targetMarketRepeaterRepository = $targetMarketRepeaterRepository;
+        $this->strategyRepository            = $strategyRepository;
+        $this->marketingProcessRepository    = $marketingProcessRepository;
+        $this->tasksRepository               = $tasksRepository;
+        $this->processSalesRepository        = $processSalesRepository;
+        $this->operationsRepository          = $operationsRepository;
+        $this->peopleRepository              = $peopleRepository;
+        $this->moneyRepository               = $moneyRepository;
+        $this->researchDevelopmentRepository = $researchDevelopmentRepository;
+        $this->leadershipRepository          = $leadershipRepository;
+        $this->legalRepository               = $legalRepository;
     }
 
     /**
@@ -70,6 +88,37 @@ class Shortcodes
                 $entity = $this->targetMarketRepeaterRepository->get_all();
                 $viewID = ViewIDs::TARGET_MARKET;
                 $formID = FormIds::TARGET_MARKET_REPEATER;
+            }
+            if ($form == 'operations') {
+                $entity = $this->operationsRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_OPERATIONS;
+                $formID = FormIds::PROCESS_OPERATIONS;
+            }
+            if ($form == 'people') {
+                $entity = $this->peopleRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_PEOPLE;
+                $formID = FormIds::PROCESS_PEOPLE;
+            }
+            if ($form == 'money') {
+                $entity = $this->moneyRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_MONEY;
+                $formID = FormIds::PROCESS_MONEY;
+            }
+            if ($form == 'r&d') {
+                $entity              = $this->researchDevelopmentRepository->get_one_for_user($userID);
+                $viewID              = ViewIDs::PROCESS_RESEARCH_DEVELOPMENT;
+                $formID              = FormIds::PROCESS_RESEARCH_DEVELOPMENT;
+                $capitalisedFormName = 'R&D';
+            }
+            if ($form == 'leadership') {
+                $entity = $this->leadershipRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_LEADERSHIP;
+                $formID = FormIds::PROCESS_LEADERSHIP;
+            }
+            if ($form == 'legal') {
+                $entity = $this->legalRepository->get_one_for_user($userID);
+                $viewID = ViewIDs::PROCESS_LEGAL;
+                $formID = FormIds::PROCESS_LEGAL;
             }
             return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
         }

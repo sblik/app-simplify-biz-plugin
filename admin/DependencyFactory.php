@@ -28,6 +28,14 @@ class DependencyFactory
         $tasksRepository                = new TasksRepository($gravityFormsWrapper);
         $processSalesRepository         = new ProcessSalesRepository($gravityFormsWrapper);
         $targetMarketRepeaterRepository = new TargetMarketRepeaterRepository($gravityFormsWrapper);
+
+        $operationsRepository          = new OperationsRepository($gravityFormsWrapper);
+        $peopleRepository              = new PeopleRepository($gravityFormsWrapper);
+        $moneyRepository               = new MoneyRepository($gravityFormsWrapper);
+        $researchDevelopmentRepository = new ResearchDevelopmentRepository($gravityFormsWrapper);
+        $leadershipRepository          = new LeadershipRepository($gravityFormsWrapper);
+        $legalRepository               = new LegalRepository($gravityFormsWrapper);
+
         //Usecases
         $exampleUsecase     = new ExampleUsecase($attendeeDashboardRepository);
         $wpHeartbeatExample = new WPHeartbeatExample($attendeeDashboardRepository);
@@ -37,7 +45,13 @@ class DependencyFactory
         $userRegistered     = new UserRegistered($inviteGuestRepository);
         $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
         $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
-        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository);
+        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
+            $operationsRepository,
+            $peopleRepository,
+            $moneyRepository,
+            $researchDevelopmentRepository,
+            $leadershipRepository,
+            $legalRepository,);
 
 
         new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);
