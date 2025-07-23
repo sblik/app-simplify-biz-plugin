@@ -61,7 +61,7 @@ class Shortcodes
         $userID      = get_current_user_id();
 
         $form = strtolower($form);
-        
+
         if (empty($class)) {
             $class = 'smplfy-heading-link';
         }
@@ -140,7 +140,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingProcessEntity|SalesEntity|StrategyEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(MarketingProcessEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
