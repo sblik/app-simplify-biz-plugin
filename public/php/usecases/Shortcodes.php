@@ -27,16 +27,17 @@ class Shortcodes
                                 LeadershipRepository          $leadershipRepository,
                                 LegalRepository               $legalRepository)
     {
-        $this->strategyRepository            = $strategyRepository;
-        $this->marketingProcessRepository    = $marketingProcessRepository;
-        $this->tasksRepository               = $tasksRepository;
-        $this->processSalesRepository        = $processSalesRepository;
-        $this->operationsRepository          = $operationsRepository;
-        $this->peopleRepository              = $peopleRepository;
-        $this->moneyRepository               = $moneyRepository;
-        $this->researchDevelopmentRepository = $researchDevelopmentRepository;
-        $this->leadershipRepository          = $leadershipRepository;
-        $this->legalRepository               = $legalRepository;
+        $this->strategyRepository             = $strategyRepository;
+        $this->marketingProcessRepository     = $marketingProcessRepository;
+        $this->tasksRepository                = $tasksRepository;
+        $this->processSalesRepository         = $processSalesRepository;
+        $this->operationsRepository           = $operationsRepository;
+        $this->peopleRepository               = $peopleRepository;
+        $this->moneyRepository                = $moneyRepository;
+        $this->researchDevelopmentRepository  = $researchDevelopmentRepository;
+        $this->leadershipRepository           = $leadershipRepository;
+        $this->legalRepository                = $legalRepository;
+        $this->targetMarketRepeaterRepository = $targetMarketRepeaterRepository;
     }
 
     /**
