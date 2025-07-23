@@ -86,7 +86,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingProcessEntity|ProcessSalesEntity|StrategyEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(MarketingProcessEntity|SalesEntity|StrategyEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
