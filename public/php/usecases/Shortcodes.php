@@ -61,7 +61,7 @@ class Shortcodes
         $userID      = get_current_user_id();
 
         $form = strtolower($form);
-
+        
         if (empty($class)) {
             $class = 'smplfy-heading-link';
         }
@@ -105,7 +105,7 @@ class Shortcodes
                 $viewID = ViewIDs::PROCESS_MONEY;
                 $formID = FormIds::PROCESS_MONEY;
             }
-            if ($form == 'r&d') {
+            if ($form == 'randd') {
                 $entity              = $this->researchDevelopmentRepository->get_one_for_user($userID);
                 $viewID              = ViewIDs::PROCESS_RESEARCH_DEVELOPMENT;
                 $formID              = FormIds::PROCESS_RESEARCH_DEVELOPMENT;
@@ -121,7 +121,11 @@ class Shortcodes
                 $viewID = ViewIDs::PROCESS_LEGAL;
                 $formID = FormIds::PROCESS_LEGAL;
             }
-            return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
+            if (!empty($viewID)) {
+                return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
+            } else {
+                return '<p>Shortcode configuration error';
+            }
         }
         return null;
     }
