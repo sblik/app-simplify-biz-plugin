@@ -8,9 +8,9 @@ use SmplfyCore\SMPLFY_Log;
 class Shortcodes
 {
     private StrategyRepository             $strategyRepository;
-    private MarketingProcessRepository     $marketingProcessRepository;
+    private MarketingRepository            $marketingProcessRepository;
     private TasksRepository                $tasksRepository;
-    private ProcessSalesRepository         $processSalesRepository;
+    private SalesRepository                $salesRepository;
     private TargetMarketRepeaterRepository $targetMarketRepeaterRepository;
     private OperationsRepository           $operationsRepository;
     private PeopleRepository               $peopleRepository;
@@ -20,8 +20,8 @@ class Shortcodes
     private LegalRepository                $legalRepository;
 
     public function __construct(StrategyRepository            $strategyRepository,
-                                MarketingProcessRepository    $marketingProcessRepository, TasksRepository $tasksRepository,
-                                                              $processSalesRepository, TargetMarketRepeaterRepository $targetMarketRepeaterRepository, OperationsRepository $operationsRepository,
+                                MarketingRepository           $marketingProcessRepository, TasksRepository $tasksRepository,
+                                                              $salesRepository, TargetMarketRepeaterRepository $targetMarketRepeaterRepository, OperationsRepository $operationsRepository,
                                 PeopleRepository              $peopleRepository,
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
@@ -31,7 +31,7 @@ class Shortcodes
         $this->strategyRepository             = $strategyRepository;
         $this->marketingProcessRepository     = $marketingProcessRepository;
         $this->tasksRepository                = $tasksRepository;
-        $this->processSalesRepository         = $processSalesRepository;
+        $this->salesRepository                = $salesRepository;
         $this->operationsRepository           = $operationsRepository;
         $this->peopleRepository               = $peopleRepository;
         $this->moneyRepository                = $moneyRepository;
@@ -83,7 +83,7 @@ class Shortcodes
                     $formID = FormIds::PROCESS_MARKETING;
                 }
                 if ($form == 'sales') {
-                    $entity = $this->processSalesRepository->get_one_for_user($userID);
+                    $entity = $this->salesRepository->get_one_for_user($userID);
                     $viewID = ViewIDs::PROCESS_SALES;
                     $formID = FormIds::PROCESS_SALES;
                 }
@@ -129,11 +129,10 @@ class Shortcodes
             } catch (Exception $exception) {
                 error_log('Shortcode error: ' . $exception->getMessage()); // Log for debugging
 
-
                 return '<div class="smplfy-error">An error occurred. Please try again or contact support.</div>';
             }
         }
-        return '<div class="smplfy-error">An error occurred. Please try again or contact support.</div>';
+        return "<div class='$class smplfy-error'>An error occurred. Please try again or contact support.</div>";
     }
 
     /**
@@ -146,7 +145,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingProcessEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|processLegalEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {

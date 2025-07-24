@@ -6,12 +6,12 @@ use SmplfyCore\SMPLFY_Log;
 
 class ModifyMenuItems
 {
-    private StrategyRepository         $strategyRepository;
-    private MarketingProcessRepository $marketingProcessRepository;
-    private TasksRepository            $tasksRepository;
-    private ProcessSalesRepository     $processSalesRepository;
+    private StrategyRepository  $strategyRepository;
+    private MarketingRepository $marketingProcessRepository;
+    private TasksRepository     $tasksRepository;
+    private SalesRepository     $processSalesRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository, TasksRepository $tasksRepository, ProcessSalesRepository $processSalesRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $processSalesRepository)
     {
         $this->strategyRepository         = $strategyRepository;
         $this->marketingProcessRepository = $marketingProcessRepository;

@@ -16,7 +16,7 @@ use WP_Error;
  * @method static SalesEntity[] update(SalesEntity $entity)
  * @method static int|WP_Error add(SalesEntity $entity)
  */
-class ProcessSalesRepository extends SMPLFY_BaseRepository
+class SalesRepository extends SMPLFY_BaseRepository
 {
     public function __construct(SMPLFY_GravityFormsApiWrapper $gravityFormsApi)
     {

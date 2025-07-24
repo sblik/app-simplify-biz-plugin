@@ -24,9 +24,9 @@ class DependencyFactory
         $inviteGuestRepository          = new InviteGuestRepeaterRepository($gravityFormsWrapper);
         $inviteGuestParentRepository    = new InviteGuestParentRepository($gravityFormsWrapper);
         $strategyRepository             = new StrategyRepository($gravityFormsWrapper);
-        $marketingRepository            = new MarketingProcessRepository($gravityFormsWrapper);
+        $marketingRepository            = new MarketingRepository($gravityFormsWrapper);
         $tasksRepository                = new TasksRepository($gravityFormsWrapper);
-        $processSalesRepository         = new ProcessSalesRepository($gravityFormsWrapper);
+        $processSalesRepository         = new SalesRepository($gravityFormsWrapper);
         $targetMarketRepeaterRepository = new TargetMarketRepeaterRepository($gravityFormsWrapper);
 
         $operationsRepository          = new OperationsRepository($gravityFormsWrapper);

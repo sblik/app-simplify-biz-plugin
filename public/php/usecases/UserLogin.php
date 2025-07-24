@@ -11,9 +11,9 @@ class UserLogin
 
     private StrategyRepository $strategyRepository;
 
-    private MarketingProcessRepository $marketingProcessRepository;
+    private MarketingRepository $marketingProcessRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingProcessRepository $marketingProcessRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository)
     {
         $this->strategyRepository         = $strategyRepository;
         $this->marketingProcessRepository = $marketingProcessRepository;
