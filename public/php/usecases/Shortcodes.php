@@ -145,7 +145,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|processLegalEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
     {
         if (!empty($entity)) {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {

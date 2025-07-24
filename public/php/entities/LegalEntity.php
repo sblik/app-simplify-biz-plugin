@@ -25,7 +25,7 @@ use SmplfyCore\SMPLFY_BaseEntity;
  * @property $systemsRepeater
  * @property $status
  */
-class processLegalEntity extends SMPLFY_BaseEntity
+class LegalEntity extends SMPLFY_BaseEntity
 {
     public function __construct($formEntry = array())
     {
