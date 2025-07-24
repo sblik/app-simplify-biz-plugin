@@ -133,7 +133,7 @@ class Shortcodes
                 return '<div class="smplfy-error">An error occurred. Please try again or contact support.</div>';
             }
         }
-        return null;
+        return '<div class="smplfy-error">An error occurred. Please try again or contact support.</div>';
     }
 
     /**
