@@ -7,16 +7,16 @@ use SmplfyCore\SMPLFY_Log;
 class ModifyMenuItems
 {
     private StrategyRepository  $strategyRepository;
-    private MarketingRepository $marketingProcessRepository;
+    private MarketingRepository $marketingRepository;
     private TasksRepository     $tasksRepository;
-    private SalesRepository     $processSalesRepository;
+    private SalesRepository     $salesRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $processSalesRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $salesRepository)
     {
-        $this->strategyRepository         = $strategyRepository;
-        $this->marketingProcessRepository = $marketingProcessRepository;
-        $this->tasksRepository            = $tasksRepository;
-        $this->processSalesRepository     = $processSalesRepository;
+        $this->strategyRepository  = $strategyRepository;
+        $this->marketingRepository = $marketingProcessRepository;
+        $this->tasksRepository     = $tasksRepository;
+        $this->salesRepository     = $salesRepository;
     }
 
     function modify_menu_items($menu_items)
@@ -24,8 +24,8 @@ class ModifyMenuItems
         $userID = get_current_user_id();
 
         $strategyEntity         = $this->strategyRepository->get_one_for_user($userID);
-        $marketingProcessEntity = $this->marketingProcessRepository->get_one_for_user($userID);
-        $processSalesEntity     = $this->processSalesRepository->get_one_for_user($userID);
+        $marketingProcessEntity = $this->marketingRepository->get_one_for_user($userID);
+        $processSalesEntity     = $this->salesRepository->get_one_for_user($userID);
 
         $tasksEntity = $this->tasksRepository->get_one_for_user($userID);
 

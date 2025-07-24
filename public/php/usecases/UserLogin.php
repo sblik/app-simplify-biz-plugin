@@ -11,12 +11,12 @@ class UserLogin
 
     private StrategyRepository $strategyRepository;
 
-    private MarketingRepository $marketingProcessRepository;
+    private MarketingRepository $marketingRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository)
+    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingRepository)
     {
-        $this->strategyRepository         = $strategyRepository;
-        $this->marketingProcessRepository = $marketingProcessRepository;
+        $this->strategyRepository  = $strategyRepository;
+        $this->marketingRepository = $marketingRepository;
     }
 
     /**
@@ -31,7 +31,7 @@ class UserLogin
     public function handle_redirect($redirect_to, $user): string
     {
         $strategyEntity  = $this->strategyRepository->get_one_for_user($user->ID);
-        $marketingEntity = $this->marketingProcessRepository->get_one_for_user($user->ID);
+        $marketingEntity = $this->marketingRepository->get_one_for_user($user->ID);
 
         if (UserActions::does_user_have_role($user, 'administrator')) {
             return '/wp-admin';
