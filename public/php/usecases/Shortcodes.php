@@ -2,6 +2,7 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use Exception;
 use SmplfyCore\SMPLFY_Log;
 
 class Shortcodes
@@ -70,61 +71,66 @@ class Shortcodes
         }
 
         if (!empty($form)) {
-            if ($form == 'strategy') {
-                $entity = $this->strategyRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::STRATEGY;
-                $formID = FormIds::STRATEGY;
-            }
-            if ($form == 'marketing') {
-                $entity = $this->marketingProcessRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_MARKETING;
-                $formID = FormIds::PROCESS_MARKETING;
-            }
-            if ($form == 'sales') {
-                $entity = $this->processSalesRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_SALES;
-                $formID = FormIds::PROCESS_SALES;
-            }
-            if ($form == 'target market') {
-                $entity = $this->targetMarketRepeaterRepository->get_all();
-                $viewID = ViewIDs::TARGET_MARKET;
-                $formID = FormIds::TARGET_MARKET_REPEATER;
-            }
-            if ($form == 'operations') {
-                $entity = $this->operationsRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_OPERATIONS;
-                $formID = FormIds::PROCESS_OPERATIONS;
-            }
-            if ($form == 'people') {
-                $entity = $this->peopleRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_PEOPLE;
-                $formID = FormIds::PROCESS_PEOPLE;
-            }
-            if ($form == 'money') {
-                $entity = $this->moneyRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_MONEY;
-                $formID = FormIds::PROCESS_MONEY;
-            }
-            if ($form == 'randd') {
-                $entity              = $this->researchDevelopmentRepository->get_one_for_user($userID);
-                $viewID              = ViewIDs::PROCESS_RESEARCH_DEVELOPMENT;
-                $formID              = FormIds::PROCESS_RESEARCH_DEVELOPMENT;
-                $capitalisedFormName = 'R&D';
-            }
-            if ($form == 'leadership') {
-                $entity = $this->leadershipRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_LEADERSHIP;
-                $formID = FormIds::PROCESS_LEADERSHIP;
-            }
-            if ($form == 'legal') {
-                $entity = $this->legalRepository->get_one_for_user($userID);
-                $viewID = ViewIDs::PROCESS_LEGAL;
-                $formID = FormIds::PROCESS_LEGAL;
-            }
-            if (!empty($viewID)) {
-                return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
-            } else {
-                return '<p>Shortcode configuration error';
+            try {
+                if ($form == 'strategy') {
+                    $entity = $this->strategyRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::STRATEGY;
+                    $formID = FormIds::STRATEGY;
+                }
+                if ($form == 'marketing') {
+                    $entity = $this->marketingProcessRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_MARKETING;
+                    $formID = FormIds::PROCESS_MARKETING;
+                }
+                if ($form == 'sales') {
+                    $entity = $this->processSalesRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_SALES;
+                    $formID = FormIds::PROCESS_SALES;
+                }
+                if ($form == 'target market') {
+                    $entity = $this->targetMarketRepeaterRepository->get_all();
+                    $viewID = ViewIDs::TARGET_MARKET;
+                    $formID = FormIds::TARGET_MARKET_REPEATER;
+                }
+                if ($form == 'operations') {
+                    $entity = $this->operationsRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_OPERATIONS;
+                    $formID = FormIds::PROCESS_OPERATIONS;
+                }
+                if ($form == 'people') {
+                    $entity = $this->peopleRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_PEOPLE;
+                    $formID = FormIds::PROCESS_PEOPLE;
+                }
+                if ($form == 'money') {
+                    $entity = $this->moneyRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_MONEY;
+                    $formID = FormIds::PROCESS_MONEY;
+                }
+                if ($form == 'randd') {
+                    $entity              = $this->researchDevelopmentRepository->get_one_for_user($userID);
+                    $viewID              = ViewIDs::PROCESS_RESEARCH_DEVELOPMENT;
+                    $formID              = FormIds::PROCESS_RESEARCH_DEVELOPMENT;
+                    $capitalisedFormName = 'R&D';
+                }
+                if ($form == 'leadership') {
+                    $entity = $this->leadershipRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_LEADERSHIP;
+                    $formID = FormIds::PROCESS_LEADERSHIP;
+                }
+                if ($form == 'legal') {
+                    $entity = $this->legalRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_LEGAL;
+                    $formID = FormIds::PROCESS_LEGAL;
+                }
+                if (!empty($viewID)) {
+                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
+                }
+            } catch (Exception $exception) {
+                error_log('Shortcode error: ' . $exception->getMessage()); // Log for debugging
+
+
+                return '<div class="smplfy-error">An error occurred. Please try again or contact support.</div>';
             }
         }
         return null;
