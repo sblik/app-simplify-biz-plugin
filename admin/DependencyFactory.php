@@ -20,9 +20,6 @@ class DependencyFactory
         $gravityFormsWrapper = new SMPLFY_GravityFormsApiWrapper();
 
         // Repositories
-        $attendeeDashboardRepository    = new AttendeeDashboardRepository($gravityFormsWrapper);
-        $inviteGuestRepository          = new InviteGuestRepeaterRepository($gravityFormsWrapper);
-        $inviteGuestParentRepository    = new InviteGuestParentRepository($gravityFormsWrapper);
         $strategyRepository             = new StrategyRepository($gravityFormsWrapper);
         $marketingRepository            = new MarketingRepository($gravityFormsWrapper);
         $tasksRepository                = new TasksRepository($gravityFormsWrapper);
@@ -37,15 +34,12 @@ class DependencyFactory
         $legalRepository               = new LegalRepository($gravityFormsWrapper);
 
         //Usecases
-        $exampleUsecase     = new ExampleUsecase($attendeeDashboardRepository);
-        $wpHeartbeatExample = new WPHeartbeatExample($attendeeDashboardRepository);
-        $purchaseCompleted  = new PurchaseCompleted($inviteGuestRepository, $inviteGuestParentRepository);
-        $invitingGuest      = new InvitingGuest($attendeeDashboardRepository, $inviteGuestRepository);
-        $checkout           = new Checkout($attendeeDashboardRepository, $inviteGuestRepository);
-        $userRegistered     = new UserRegistered($inviteGuestRepository);
-        $userLogin          = new UserLogin($strategyRepository, $marketingRepository);
-        $modifyMenuItems    = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
-        $shortcodes         = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
+        $purchaseCompleted = new PurchaseCompleted();
+        $checkout          = new Checkout();
+        $userRegistered    = new UserRegistered();
+        $userLogin         = new UserLogin($strategyRepository, $marketingRepository);
+        $modifyMenuItems   = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
+        $shortcodes        = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
             $operationsRepository,
             $peopleRepository,
             $moneyRepository,
@@ -54,8 +48,8 @@ class DependencyFactory
             $legalRepository,);
 
 
-        new GravityFormsAdapter($exampleUsecase, $invitingGuest, $userRegistered);
-        new WordpressAdapter($wpHeartbeatExample, $userLogin, $modifyMenuItems, $shortcodes);
+        new GravityFormsAdapter($userRegistered);
+        new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin);
 

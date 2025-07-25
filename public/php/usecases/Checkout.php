@@ -6,13 +6,10 @@ use SmplfyCore\SMPLFY_Log;
 
 class Checkout
 {
-    private AttendeeDashboardRepository   $attendeeDashboardRepository;
-    private InviteGuestRepeaterRepository $inviteGuestRepeaterRepository;
 
-    public function __construct(AttendeeDashboardRepository $attendeeDashboardRepository, InviteGuestRepeaterRepository $inviteGuestRepeaterRepository)
+    public function __construct()
     {
-        $this->attendeeDashboardRepository   = $attendeeDashboardRepository;
-        $this->inviteGuestRepeaterRepository = $inviteGuestRepeaterRepository;
+
     }
 
 

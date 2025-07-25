@@ -12,8 +12,6 @@ class FormIds
     const INVITE_GUEST_REPEATER        = 33;
     const PROCESS_SALES                = 91;
     const TARGET_MARKET_REPEATER       = 70;
-    const ATTENDEE_DASHBOARD           = 999;
-    const INVITE_GUEST_PARENT          = 999;
     const PROCESS_OPERATIONS           = 95;
     const PROCESS_PEOPLE               = 96;
     const PROCESS_MONEY                = 97;

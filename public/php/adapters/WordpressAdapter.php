@@ -4,17 +4,15 @@ namespace SMPLFY\appsimplifybiz;
 
 class WordpressAdapter
 {
-    private WPHeartbeatExample $wpHeartbeatExample;
-    private UserLogin          $userLogin;
-    private ModifyMenuItems    $modifyMenuItems;
-    private Shortcodes         $shortcodes;
+    private UserLogin       $userLogin;
+    private ModifyMenuItems $modifyMenuItems;
+    private Shortcodes      $shortcodes;
 
-    public function __construct(WPHeartbeatExample $wpHeartbeatExample, UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes)
+    public function __construct(UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes)
     {
-        $this->wpHeartbeatExample = $wpHeartbeatExample;
-        $this->userLogin          = $userLogin;
-        $this->modifyMenuItems    = $modifyMenuItems;
-        $this->shortcodes         = $shortcodes;
+        $this->userLogin       = $userLogin;
+        $this->modifyMenuItems = $modifyMenuItems;
+        $this->shortcodes      = $shortcodes;
 
         $this->register_hooks();
         $this->register_filters();
