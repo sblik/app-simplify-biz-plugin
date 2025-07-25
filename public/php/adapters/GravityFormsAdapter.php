@@ -23,9 +23,8 @@ class GravityFormsAdapter
      */
     public function register_hooks()
     {
-        if (get_current_blog_id() == SiteIDs::MY_DO_ITEMS) {
-            add_action('gform_user_registered', [$this->userRegistered, 'handle_ticket_assigned'], 10, 4);
-        }
+        add_action('gform_user_registered', [$this->userRegistered, 'handle_ticket_assigned'], 10, 4);
+
     }
 
     /**
