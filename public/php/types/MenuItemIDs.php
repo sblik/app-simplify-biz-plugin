@@ -1,4 +1,7 @@
 <?php
+/**
+ *  Each constant refers to the Menu item ID given when a menu item is created
+ */
 
 namespace SMPLFY\appsimplifybiz;
 

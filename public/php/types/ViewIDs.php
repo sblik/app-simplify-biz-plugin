@@ -1,4 +1,7 @@
 <?php
+/**
+ *  Gravity Kit View IDs
+ */
 
 namespace SMPLFY\appsimplifybiz;
 

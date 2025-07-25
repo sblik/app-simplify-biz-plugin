@@ -1,6 +1,6 @@
 <?php
 /**
- * A types file can be used to organise unique identifiers that are commonly used throughout your plugin
+ * Gravity Form IDs
  */
 
 namespace SMPLFY\appsimplifybiz;
