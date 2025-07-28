@@ -38,7 +38,12 @@ class DependencyFactory
         $checkout          = new Checkout();
         $userRegistered    = new UserRegistered();
         $userLogin         = new UserLogin($strategyRepository, $marketingRepository);
-        $modifyMenuItems   = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository);
+        $modifyMenuItems   = new ModifyMenuItems($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $leadershipRepository,
+            $operationsRepository,
+            $peopleRepository,
+            $moneyRepository,
+            $researchDevelopmentRepository,
+            $legalRepository);
         $shortcodes        = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
             $operationsRepository,
             $peopleRepository,

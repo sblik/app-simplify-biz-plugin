@@ -6,17 +6,34 @@ use SmplfyCore\SMPLFY_Log;
 
 class ModifyMenuItems
 {
-    private StrategyRepository  $strategyRepository;
-    private MarketingRepository $marketingRepository;
-    private TasksRepository     $tasksRepository;
-    private SalesRepository     $salesRepository;
+    private StrategyRepository            $strategyRepository;
+    private MarketingRepository           $marketingRepository;
+    private TasksRepository               $tasksRepository;
+    private SalesRepository               $salesRepository;
+    private LeadershipRepository          $leadershipRepository;
+    private OperationsRepository          $operationsRepository;
+    private PeopleRepository              $peopleRepository;
+    private MoneyRepository               $moneyRepository;
+    private ResearchDevelopmentRepository $researchDevelopmentRepository;
+    private LegalRepository               $legalRepository;
 
-    public function __construct(StrategyRepository $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $salesRepository)
+    public function __construct(StrategyRepository            $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $salesRepository, LeadershipRepository $leadershipRepository,
+                                OperationsRepository          $operationsRepository,
+                                PeopleRepository              $peopleRepository,
+                                MoneyRepository               $moneyRepository,
+                                ResearchDevelopmentRepository $researchDevelopmentRepository,
+                                LegalRepository               $legalRepository)
     {
-        $this->strategyRepository  = $strategyRepository;
-        $this->marketingRepository = $marketingProcessRepository;
-        $this->tasksRepository     = $tasksRepository;
-        $this->salesRepository     = $salesRepository;
+        $this->strategyRepository            = $strategyRepository;
+        $this->marketingRepository           = $marketingProcessRepository;
+        $this->tasksRepository               = $tasksRepository;
+        $this->salesRepository               = $salesRepository;
+        $this->operationsRepository          = $operationsRepository;
+        $this->peopleRepository              = $peopleRepository;
+        $this->moneyRepository               = $moneyRepository;
+        $this->researchDevelopmentRepository = $researchDevelopmentRepository;
+        $this->legalRepository               = $legalRepository;
+
     }
 
     function modify_menu_items($menu_items)
@@ -36,6 +53,7 @@ class ModifyMenuItems
         }
 
         foreach ($menu_items as $menu_item) {
+            SMPLFY_Log::info("MENU ITEM: ", $menu_item);
 
             if ($menu_item->ID == MenuItemIDs::START) {
                 if ($startCompleted) {
