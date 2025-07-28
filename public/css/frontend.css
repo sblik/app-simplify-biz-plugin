@@ -63,3 +63,7 @@
 .bg_purple {
     background-color: #DACFDF;
 }
+
+.smplfy-hidden {
+    display: none;
+}

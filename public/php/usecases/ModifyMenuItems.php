@@ -147,7 +147,7 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::PROCESS_SALES) {
                 if (empty($processSalesEntity)) {
-                    $menu_item->url = SITE_URL . '/start/?id=91';
+                    $menu_item->classes[0] = 'smplfy-hidden';
                 } else {
                     $entryID  = $processSalesEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
