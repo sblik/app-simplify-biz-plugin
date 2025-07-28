@@ -83,7 +83,7 @@ class ModifyMenuItems
                 }
             }
 
-            if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
+            if ($menu_item->ID == MenuItemIDs::PROCESS_MARKETING) {
                 if (!empty($marketingEntity)) {
                     $entryID  = $marketingEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Marketing Plan[/gv_entry_link]');
