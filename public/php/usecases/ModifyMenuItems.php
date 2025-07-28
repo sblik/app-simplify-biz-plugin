@@ -28,6 +28,7 @@ class ModifyMenuItems
         $this->marketingRepository           = $marketingProcessRepository;
         $this->tasksRepository               = $tasksRepository;
         $this->salesRepository               = $salesRepository;
+        $this->leadershipRepository          = $leadershipRepository;
         $this->operationsRepository          = $operationsRepository;
         $this->peopleRepository              = $peopleRepository;
         $this->moneyRepository               = $moneyRepository;
