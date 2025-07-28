@@ -40,13 +40,20 @@ class ModifyMenuItems
     {
         $userID = get_current_user_id();
 
-        $strategyEntity         = $this->strategyRepository->get_one_for_user($userID);
-        $marketingProcessEntity = $this->marketingRepository->get_one_for_user($userID);
-        $processSalesEntity     = $this->salesRepository->get_one_for_user($userID);
+        $strategyEntity   = $this->strategyRepository->get_one_for_user($userID);
+        $marketingEntity  = $this->marketingRepository->get_one_for_user($userID);
+        $salesEntity      = $this->salesRepository->get_one_for_user($userID);
+        $operationsEntity = $this->operationsRepository->get_one_for_user($userID);
+        $leadershipEntity = $this->leadershipRepository->get_one_for_user($userID);
+        $peopleEntity     = $this->peopleRepository->get_one_for_user($userID);
+        $moneyEntity      = $this->moneyRepository->get_one_for_user($userID);
+        $researchEntity   = $this->researchDevelopmentRepository->get_one_for_user($userID);
+        $legalEntity      = $this->legalRepository->get_one_for_user($userID);
+
 
         $tasksEntity = $this->tasksRepository->get_one_for_user($userID);
 
-        if (!empty($strategyEntity) && !empty($marketingProcessEntity)) {
+        if (!empty($strategyEntity) && !empty($marketingEntity)) {
             $startCompleted = true;
         } else {
             $startCompleted = false;
@@ -76,8 +83,8 @@ class ModifyMenuItems
             }
 
             if ($menu_item->ID == MenuItemIDs::MARKETING_PLAN_ENTRY) {
-                if (!empty($marketingProcessEntity)) {
-                    $entryID  = $marketingProcessEntity->id;
+                if (!empty($marketingEntity)) {
+                    $entryID  = $marketingEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Marketing Plan[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
@@ -85,8 +92,7 @@ class ModifyMenuItems
                     }
                     $menu_item->url = $viewLink;
                 } else {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
+                    $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
 
@@ -100,8 +106,7 @@ class ModifyMenuItems
                     }
                     $menu_item->url = $viewLink;
                 } else {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
+                    $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
 
@@ -121,8 +126,8 @@ class ModifyMenuItems
                 if (empty($strategyEntity)) {
                     $menu_item->title = '';
                     $menu_item->url   = '';
-                } else if (!empty($marketingProcessEntity)) {
-                    $entryID  = $marketingProcessEntity->id;
+                } else if (!empty($marketingEntity)) {
+                    $entryID  = $marketingEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Do Items[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
@@ -145,12 +150,91 @@ class ModifyMenuItems
                     $menu_item->url   = '';
                 }
             }
+
             if ($menu_item->ID == MenuItemIDs::PROCESS_SALES) {
-                if (empty($processSalesEntity)) {
+                if (empty($salesEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 } else {
-                    $entryID  = $processSalesEntity->id;
+                    $entryID  = $salesEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_SALES . '"]Sales[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_LEADERSHIP) {
+                if (empty($leadershipEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $leadershipEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_LEADERSHIP . '"]Leadership[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_OPERATIONS) {
+                if (empty($operationsEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $operationsEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_OPERATIONS . '"]Operations[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_PEOPLE) {
+                if (empty($peopleEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $peopleEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_PEOPLE . '"]People[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_MONEY) {
+                if (empty($moneyEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $moneyEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_MONEY . '"]Money[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_RESEARCH_DEVELOPMENT) {
+                if (empty($researchEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $researchEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_RESEARCH_DEVELOPMENT . '"]R&D[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::PROCESS_LEGAL) {
+                if (empty($legalEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $legalEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_LEGAL . '"]Legal[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                         $viewLink = $matches[1];
