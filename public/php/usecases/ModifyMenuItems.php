@@ -61,8 +61,7 @@ class ModifyMenuItems
         }
 
         foreach ($menu_items as $menu_item) {
-            SMPLFY_Log::info("MENU ITEM: ", $menu_item);
-
+       
             if ($menu_item->ID == MenuItemIDs::START) {
                 if ($startCompleted) {
                     $menu_item->title = '';
