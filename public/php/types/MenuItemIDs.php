@@ -15,8 +15,8 @@ class MenuItemIDs
     const STRATEGY                     = 100640;
     const MARKETING_PLAN_ENTRY         = 100641;
     const TASKS                        = 100670;
-    const MARKETING_PROCESS            = 100737;
     const PROCESS                      = 100736;
+    const MARKETING_PROCESS            = 100737;
     const ACTION_STEPS                 = 100673;
     const PROCESS_SALES                = 100919;
     const PROCESS_MARKETING            = 100918;

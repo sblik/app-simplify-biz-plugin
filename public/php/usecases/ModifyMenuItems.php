@@ -61,7 +61,7 @@ class ModifyMenuItems
         }
 
         foreach ($menu_items as $menu_item) {
-       
+
             if ($menu_item->ID == MenuItemIDs::START) {
                 if ($startCompleted) {
                     $menu_item->title = '';
@@ -95,7 +95,11 @@ class ModifyMenuItems
                     $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
-
+            if ($menu_item->ID == MenuItemIDs::PROCESS) {
+                if (empty($leadershipEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                }
+            }
             if ($menu_item->ID == MenuItemIDs::TASKS) {
                 if (!empty($tasksEntity)) {
                     $entryID  = $tasksEntity->id;
