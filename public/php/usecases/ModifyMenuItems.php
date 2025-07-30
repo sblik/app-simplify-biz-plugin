@@ -79,7 +79,7 @@ class ModifyMenuItems
                     }
                     $menu_item->url = $viewLink;
                 } else {
-                    $menu_item->url = SITE_URL . '/start/?id=67';
+                    $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
 
