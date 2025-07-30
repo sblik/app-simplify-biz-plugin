@@ -36,7 +36,6 @@ class WordpressAdapter
      */
     public function register_filters()
     {
-        add_filter('heartbeat_received', [$this->wpHeartbeatExample, 'receive_heartbeat'], 10, 2);
         add_filter('login_redirect', [$this->userLogin, 'handle_redirect'], 10, 3);
         add_filter('wp_nav_menu_objects', [$this->modifyMenuItems, 'modify_menu_items']);
     }
