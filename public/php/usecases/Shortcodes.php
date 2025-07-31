@@ -9,7 +9,7 @@ class Shortcodes
 {
     private StrategyRepository             $strategyRepository;
     private MarketingRepository            $marketingProcessRepository;
-    private TasksRepository                $tasksRepository;
+    private ActionStepsRepository          $actionStepsRepository;
     private SalesRepository                $salesRepository;
     private TargetMarketRepeaterRepository $targetMarketRepeaterRepository;
     private OperationsRepository           $operationsRepository;
@@ -20,7 +20,7 @@ class Shortcodes
     private LegalRepository                $legalRepository;
 
     public function __construct(StrategyRepository            $strategyRepository,
-                                MarketingRepository           $marketingProcessRepository, TasksRepository $tasksRepository,
+                                MarketingRepository           $marketingProcessRepository, ActionStepsRepository $actionStepsRepository,
                                                               $salesRepository, TargetMarketRepeaterRepository $targetMarketRepeaterRepository, OperationsRepository $operationsRepository,
                                 PeopleRepository              $peopleRepository,
                                 MoneyRepository               $moneyRepository,
@@ -30,7 +30,7 @@ class Shortcodes
     {
         $this->strategyRepository             = $strategyRepository;
         $this->marketingProcessRepository     = $marketingProcessRepository;
-        $this->tasksRepository                = $tasksRepository;
+        $this->actionStepsRepository          = $actionStepsRepository;
         $this->salesRepository                = $salesRepository;
         $this->operationsRepository           = $operationsRepository;
         $this->peopleRepository               = $peopleRepository;

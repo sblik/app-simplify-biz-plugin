@@ -22,7 +22,7 @@ class DependencyFactory
         // Repositories
         $strategyRepository             = new StrategyRepository($gravityFormsWrapper);
         $marketingRepository            = new MarketingRepository($gravityFormsWrapper);
-        $tasksRepository                = new TasksRepository($gravityFormsWrapper);
+        $tasksRepository                = new ActionStepsRepository($gravityFormsWrapper);
         $processSalesRepository         = new SalesRepository($gravityFormsWrapper);
         $targetMarketRepeaterRepository = new TargetMarketRepeaterRepository($gravityFormsWrapper);
 

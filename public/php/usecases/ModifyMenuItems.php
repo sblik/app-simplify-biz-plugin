@@ -8,7 +8,7 @@ class ModifyMenuItems
 {
     private StrategyRepository            $strategyRepository;
     private MarketingRepository           $marketingRepository;
-    private TasksRepository               $tasksRepository;
+    private ActionStepsRepository         $actionStepsRepository;
     private SalesRepository               $salesRepository;
     private LeadershipRepository          $leadershipRepository;
     private OperationsRepository          $operationsRepository;
@@ -17,7 +17,7 @@ class ModifyMenuItems
     private ResearchDevelopmentRepository $researchDevelopmentRepository;
     private LegalRepository               $legalRepository;
 
-    public function __construct(StrategyRepository            $strategyRepository, MarketingRepository $marketingProcessRepository, TasksRepository $tasksRepository, SalesRepository $salesRepository, LeadershipRepository $leadershipRepository,
+    public function __construct(StrategyRepository            $strategyRepository, MarketingRepository $marketingProcessRepository, ActionStepsRepository $actionStepsRepository, SalesRepository $salesRepository, LeadershipRepository $leadershipRepository,
                                 OperationsRepository          $operationsRepository,
                                 PeopleRepository              $peopleRepository,
                                 MoneyRepository               $moneyRepository,
@@ -26,7 +26,7 @@ class ModifyMenuItems
     {
         $this->strategyRepository            = $strategyRepository;
         $this->marketingRepository           = $marketingProcessRepository;
-        $this->tasksRepository               = $tasksRepository;
+        $this->actionStepsRepository         = $actionStepsRepository;
         $this->salesRepository               = $salesRepository;
         $this->leadershipRepository          = $leadershipRepository;
         $this->operationsRepository          = $operationsRepository;
@@ -51,7 +51,7 @@ class ModifyMenuItems
         $researchEntity   = $this->researchDevelopmentRepository->get_one_for_user($userID);
         $legalEntity      = $this->legalRepository->get_one_for_user($userID);
 
-        $tasksEntity = $this->tasksRepository->get_one_for_user($userID);
+        $actionStepsEntity = $this->actionStepsRepository->get_one_for_user($userID);
 
         if (!empty($strategyEntity) && !empty($marketingEntity)) {
             $startCompleted = true;
@@ -100,8 +100,8 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::TASKS) {
-                if (!empty($tasksEntity)) {
-                    $entryID  = $tasksEntity->id;
+                if (!empty($actionStepsEntity)) {
+                    $entryID  = $actionStepsEntity->id;
                     $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::TASKS . '"]Do Items[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
@@ -148,7 +148,7 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::ACTION_STEPS) {
-                if (empty($tasksEntity)) {
+                if (empty($actionStepsEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 } else {
                     $menu_item->url = SITE_URL . '/strategy/your-action-steps/';
