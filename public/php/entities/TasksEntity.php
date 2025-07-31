@@ -30,7 +30,7 @@ class TasksEntity extends SMPLFY_BaseEntity
     public function __construct($formEntry = array())
     {
         parent::__construct($formEntry);
-        $this->formId = FormIds::DO_ITEMS;
+        $this->formId = FormIds::ACTION_STEPS;
     }
 
     protected function get_property_map(): array

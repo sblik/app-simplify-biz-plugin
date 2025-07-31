@@ -8,7 +8,7 @@ class FormIds
 {
     const STRATEGY                     = 67;
     const PROCESS_MARKETING            = 80;
-    const DO_ITEMS                     = 81;
+    const ACTION_STEPS                 = 81;
     const INVITE_GUEST_REPEATER        = 33;
     const PROCESS_SALES                = 91;
     const TARGET_MARKET_REPEATER       = 70;

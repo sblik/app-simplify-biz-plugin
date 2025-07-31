@@ -51,7 +51,6 @@ class ModifyMenuItems
         $researchEntity   = $this->researchDevelopmentRepository->get_one_for_user($userID);
         $legalEntity      = $this->legalRepository->get_one_for_user($userID);
 
-
         $tasksEntity = $this->tasksRepository->get_one_for_user($userID);
 
         if (!empty($strategyEntity) && !empty($marketingEntity)) {
@@ -149,9 +148,16 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::ACTION_STEPS) {
-                if (empty($strategyEntity)) {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
+                if (empty($tasksEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                } else {
+                    $entryID  = $tasksEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::TASKS . '"]Tasks[/gv_entry_link]');
+                    $viewLink = '';
+                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+                        $viewLink = $matches[1];
+                    }
+                    $menu_item->url = $viewLink;
                 }
             }
 

@@ -21,7 +21,7 @@ class TasksRepository extends SMPLFY_BaseRepository
     public function __construct(SMPLFY_GravityFormsApiWrapper $gravityFormsApi)
     {
         $this->entityType = TasksEntity::class;
-        $this->formId     = FormIds::DO_ITEMS;
+        $this->formId     = FormIds::ACTION_STEPS;
 
         parent::__construct($gravityFormsApi);
     }

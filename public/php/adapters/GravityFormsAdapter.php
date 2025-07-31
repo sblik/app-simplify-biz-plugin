@@ -24,7 +24,6 @@ class GravityFormsAdapter
     public function register_hooks()
     {
         add_action('gform_user_registered', [$this->userRegistered, 'handle_ticket_assigned'], 10, 4);
-
     }
 
     /**
