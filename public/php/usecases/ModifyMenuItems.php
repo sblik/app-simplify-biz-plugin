@@ -151,13 +151,7 @@ class ModifyMenuItems
                 if (empty($tasksEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 } else {
-                    $entryID  = $tasksEntity->id;
-                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::TASKS . '"]Tasks[/gv_entry_link]');
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    $menu_item->url = $viewLink;
+                    $menu_item->url = SITE_URL . '/strategy/your-action-steps/';
                 }
             }
 
