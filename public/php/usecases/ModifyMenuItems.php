@@ -62,7 +62,6 @@ class ModifyMenuItems
         }
 
         foreach ($menu_items as $menu_item) {
-            SMPLFY_Log::info("Menu Item ID: ", $menu_item->ID);
 
             if ($menu_item->ID == MenuItemIDs::START) {
                 if ($startCompleted) {

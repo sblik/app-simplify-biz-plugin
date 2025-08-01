@@ -24,6 +24,7 @@ class SignUp
 
         SMPLFY_Log::info("Signup completed event: ", $event);
         SMPLFY_Log::info("Signup completed user: ", $user);
+        SMPLFY_Log::info("Signup completed transaction data: ", $txn_data);
 
         if (!empty($user)) {
             $organisationLookupEntity = new OrganisationLookupEntity();
@@ -31,8 +32,7 @@ class SignUp
             $organisationLookupEntity->userID    = $user->ID;
             $organisationLookupEntity->createdBy = $user->ID;
 
+            $this->organisationLookupRepository->add($organisationLookupEntity);
         }
-
     }
-
 }
