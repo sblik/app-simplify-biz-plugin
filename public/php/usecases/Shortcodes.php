@@ -162,19 +162,10 @@ class Shortcodes
     public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type): string
     {
         if (!empty($entity) && $type == '') {
-            if ($formID == FormIds::TARGET_MARKET_REPEATER) {
-                return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
-            }
-
-            $url      = do_shortcode('[gv_entry_link entry_id="' . $entity->id . '" view_id="' . $viewID . '"]Strategy[/gv_entry_link]');
-            $viewLink = '';
-            if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                $viewLink = $matches[1];
-            }
-            //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
-            return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+            return $this->view_or_submit_form_link($formID, $class, $fontawesome, $entity, $viewID, $matches, $capitalisedFormName);
         } elseif ($type == 'view') {
             if (!empty($entity)) {
+                //Return Links to multi page view
                 if ($formID == FormIds::OBJECTIVES) {
                     return "<a href='/implement/view-objectives/' class='$class'><i class='$fontawesome'></i> <h3>View Objectives</h3></a>";
                 }
@@ -182,26 +173,64 @@ class Shortcodes
                     return "<a href='/implement/view-action-steps/' class='$class'><i class='$fontawesome'></i> <h3>View Action Steps</h3></a>";
                 }
             } elseif ($formID == FormIds::ACTION_STEPS) {
-                $objectivesEntity = $this->objectivesRepository->get_one_for_user(get_current_user_id());
-                if (empty($objectivesEntity)) {
-                    ?>
-                    <script>
-                        jQuery('a[href="/implement/action-steps-and-tasks/]').addClass("smplfy-hidden");
-                        jQuery(".action_steps_heading").addClass("smplfy-hidden");
-                    </script>
-                    <?php
-                }
-
+                return $this->hide_action_step_links($fontawesome);
             } else {
+                //Hidden element
                 return "<a href='/' class='smplfy-hidden'><i class='$fontawesome'></i> <h3>View</h3></a>";
             }
         } else {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
                 return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
             }
+            //If all else fails, return link goes to form submission
             $url = SITE_URL . '/start/?id=' . $formID;
             return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
         }
+    }
+
+    /**
+     * @param int $formID
+     * @param string|null $class
+     * @param string|null $fontawesome
+     * @param LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity
+     * @param int $viewID
+     * @param $matches
+     * @param string $capitalisedFormName
+     * @return string
+     */
+    public function view_or_submit_form_link(int $formID, ?string $class, ?string $fontawesome, LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity, int $viewID, $matches, string $capitalisedFormName): string
+    {
+        if ($formID == FormIds::TARGET_MARKET_REPEATER) {
+            return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
+        }
+
+        $url      = do_shortcode('[gv_entry_link entry_id="' . $entity->id . '" view_id="' . $viewID . '"]Strategy[/gv_entry_link]');
+        $viewLink = '';
+        if (preg_match('/href="([^"]+)"/', $url, $matches)) {
+            $viewLink = $matches[1];
+        }
+        //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
+        return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+    }
+
+    /**
+     * @param string|null $fontawesome
+     * @return string
+     */
+    public function hide_action_step_links(?string $fontawesome): string
+    {
+        $objectivesEntity = $this->objectivesRepository->get_one_for_user(get_current_user_id());
+        if (empty($objectivesEntity)) {
+            ?>
+            <script>
+                jQuery(document).ready(function (jQuery) {
+                    jQuery('a[href="/implement/action-steps-and-tasks/"]').addClass("smplfy-hidden");
+                    jQuery(".action_steps_heading").addClass("smplfy-hidden");
+                });
+            </script>
+            <?php
+        }
+        return "<a href='/' class='smplfy-hidden'><i class='$fontawesome'></i> <h3>View</h3></a>";
     }
 
 }
