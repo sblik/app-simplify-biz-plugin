@@ -18,6 +18,7 @@ class Shortcodes
     private ResearchDevelopmentRepository  $researchDevelopmentRepository;
     private LeadershipRepository           $leadershipRepository;
     private LegalRepository                $legalRepository;
+    private ObjectivesRepository           $objectivesRepository;
 
     public function __construct(StrategyRepository            $strategyRepository,
                                 MarketingRepository           $marketingProcessRepository, ActionStepsRepository $actionStepsRepository,
@@ -26,7 +27,7 @@ class Shortcodes
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
                                 LeadershipRepository          $leadershipRepository,
-                                LegalRepository               $legalRepository)
+                                LegalRepository               $legalRepository, ObjectivesRepository $objectivesRepository)
     {
         $this->strategyRepository             = $strategyRepository;
         $this->marketingProcessRepository     = $marketingProcessRepository;
@@ -39,6 +40,7 @@ class Shortcodes
         $this->leadershipRepository           = $leadershipRepository;
         $this->legalRepository                = $legalRepository;
         $this->targetMarketRepeaterRepository = $targetMarketRepeaterRepository;
+        $this->objectivesRepository           = $objectivesRepository;
     }
 
     /**
@@ -126,7 +128,7 @@ class Shortcodes
                     $formID = FormIds::PROCESS_LEGAL;
                 }
                 if ($form == 'objectives') {
-                    $entity = $this->legalRepository->get_one_for_user($userID);
+                    $entity = $this->objectivesRepository->get_one_for_user($userID);
                     $viewID = ViewIDs::OBJECTIVES;
                     $formID = FormIds::OBJECTIVES;
                 }
