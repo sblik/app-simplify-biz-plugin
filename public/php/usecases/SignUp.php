@@ -3,6 +3,8 @@
 namespace SMPLFY\appsimplifybiz;
 
 use SmplfyCore\SMPLFY_Log;
+use SmplfyCore\UserActions;
+use SmplfyCore\UserMeta;
 
 class SignUp
 {
@@ -27,10 +29,14 @@ class SignUp
         SMPLFY_Log::info("Signup completed transaction data: ", $txn_data);
 
         if (!empty($user)) {
+            $userID       = $user->ID;
+            $organisation = UserMeta::retrieve_user_meta($userID, 'mepr_organization');
+
             $organisationLookupEntity = new OrganisationLookupEntity();
 
-            $organisationLookupEntity->userID    = $user->ID;
-            $organisationLookupEntity->createdBy = $user->ID;
+            $organisationLookupEntity->userID           = $userID;
+            $organisationLookupEntity->createdBy        = $userID;
+            $organisationLookupEntity->organisationName = $organisation;
 
             $this->organisationLookupRepository->add($organisationLookupEntity);
         }
