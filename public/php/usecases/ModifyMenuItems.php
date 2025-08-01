@@ -62,6 +62,7 @@ class ModifyMenuItems
         }
 
         foreach ($menu_items as $menu_item) {
+            SMPLFY_Log::info("Menu Item ID: ", $menu_item->ID);
 
             if ($menu_item->ID == MenuItemIDs::START) {
                 if ($startCompleted) {
@@ -125,34 +126,6 @@ class ModifyMenuItems
                 }
             }
 
-            if ($menu_item->ID == MenuItemIDs::ADD) {
-                if (!$startCompleted) {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
-                }
-            }
-            if ($menu_item->ID == MenuItemIDs::VIEW_UPDATE) {
-                if (!$startCompleted) {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
-                }
-            }
-            if ($menu_item->ID == MenuItemIDs::MARKETING_PROCESS) {
-                if (empty($strategyEntity)) {
-                    $menu_item->title = '';
-                    $menu_item->url   = '';
-                } else if (!empty($marketingEntity)) {
-                    $entryID  = $marketingEntity->id;
-                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_MARKETING . '"]Do Items[/gv_entry_link]');
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    $menu_item->url = $viewLink;
-                } else {
-                    $menu_item->url = SITE_URL . '/start/?id=80';
-                }
-            }
             if ($menu_item->ID == MenuItemIDs::PROCESS) {
                 if (empty($strategyEntity)) {
                     $menu_item->title = '';
