@@ -32,6 +32,7 @@ class DependencyFactory
         $researchDevelopmentRepository = new ResearchDevelopmentRepository($gravityFormsWrapper);
         $leadershipRepository          = new LeadershipRepository($gravityFormsWrapper);
         $legalRepository               = new LegalRepository($gravityFormsWrapper);
+        $objectivesRepository          = new ObjectivesRepository($gravityFormsWrapper);
 
         //Usecases
         $purchaseCompleted = new PurchaseCompleted();
@@ -43,7 +44,7 @@ class DependencyFactory
             $peopleRepository,
             $moneyRepository,
             $researchDevelopmentRepository,
-            $legalRepository);
+            $legalRepository, $objectivesRepository);
         $shortcodes        = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
             $operationsRepository,
             $peopleRepository,
