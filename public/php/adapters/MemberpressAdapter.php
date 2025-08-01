@@ -2,13 +2,17 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use TablePress\PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sign;
+
 class MemberpressAdapter
 {
     private UserLogin $userLogin;
+    private SignUp    $signUp;
 
-    public function __construct(UserLogin $userLogin)
+    public function __construct(UserLogin $userLogin, SignUp $signUp)
     {
         $this->userLogin = $userLogin;
+        $this->signUp    = $signUp;
 
         $this->register_hooks();
         $this->register_filters();
@@ -21,7 +25,7 @@ class MemberpressAdapter
      */
     public function register_hooks()
     {
-
+        add_action('mepr-event-member-signup-completed', [$this->signUp, 'signup_completed']);
     }
 
     /**

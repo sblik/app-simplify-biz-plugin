@@ -18,5 +18,6 @@ class FormIds
     const PROCESS_RESEARCH_DEVELOPMENT = 98;
     const PROCESS_LEADERSHIP           = 99;
     const PROCESS_LEGAL                = 100;
+    const ORGANISATION_LOOKUP          = 90;
     const OBJECTIVES                   = 103;
 }
