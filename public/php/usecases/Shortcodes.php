@@ -52,10 +52,12 @@ class Shortcodes
             'class'       => '',
             'form'        => '',
             'fontawesome' => '',
+            'type'        => '',
         ], $atts, 'smplfy_dashboard_view_shortcode');
 
         $class               = esc_attr($atts['class']);
         $form                = esc_attr($atts['form']);
+        $type                = esc_attr($atts['type']);
         $capitalisedFormName = ucfirst(strtolower($form));
 
         $fontawesome = esc_attr($atts['fontawesome']);
@@ -123,8 +125,18 @@ class Shortcodes
                     $viewID = ViewIDs::PROCESS_LEGAL;
                     $formID = FormIds::PROCESS_LEGAL;
                 }
+                if ($form == 'objectives') {
+                    $entity = $this->legalRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::OBJECTIVES;
+                    $formID = FormIds::OBJECTIVES;
+                }
+                if ($form == 'action_steps') {
+                    $entity = $this->actionStepsRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::ACTION_STEPS;
+                    $formID = FormIds::ACTION_STEPS;
+                }
                 if (!empty($viewID)) {
-                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID);
+                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID, $type);
                 }
             } catch (Exception $exception) {
                 error_log('Shortcode error: ' . $exception->getMessage()); // Log for debugging
@@ -145,9 +157,9 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type): string
     {
-        if (!empty($entity)) {
+        if (!empty($entity) && $type == '') {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
                 return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
             }
@@ -159,6 +171,17 @@ class Shortcodes
             }
             //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
             return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+        } elseif ($type == 'view') {
+            if (!empty($entity)) {
+                if ($formID == FormIds::OBJECTIVES) {
+                    return "<a href='/implement/view-objectives/' class='$class'><i class='$fontawesome'></i> <h3>View Objectives</h3></a>";
+                }
+                if ($formID == FormIds::ACTION_STEPS) {
+                    return "<a href='/implement/view-action-steps/' class='$class'><i class='$fontawesome'></i> <h3>View Action Steps</h3></a>";
+                }
+            } else {
+                return "<a href='/' class='smplfy-hidden'><i class='$fontawesome'></i> <h3>View</h3></a>";
+            }
         } else {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
                 return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
