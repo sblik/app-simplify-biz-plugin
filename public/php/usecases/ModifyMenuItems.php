@@ -112,19 +112,7 @@ class ModifyMenuItems
                     $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
-            if ($menu_item->ID == MenuItemIDs::TASKS) {
-                if (!empty($actionStepsEntity)) {
-                    $entryID  = $actionStepsEntity->id;
-                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::TASKS . '"]Do Items[/gv_entry_link]');
-                    $viewLink = '';
-                    if (preg_match('/href="([^"]+)"/', $url, $matches)) {
-                        $viewLink = $matches[1];
-                    }
-                    $menu_item->url = $viewLink;
-                } else {
-                    $menu_item->classes[0] = 'smplfy-hidden';
-                }
-            }
+
 
             if ($menu_item->ID == MenuItemIDs::PROCESS) {
                 if (empty($strategyEntity)) {
