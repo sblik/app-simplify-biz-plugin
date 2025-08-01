@@ -51,7 +51,7 @@ class DependencyFactory
             $moneyRepository,
             $researchDevelopmentRepository,
             $leadershipRepository,
-            $legalRepository,);
+            $legalRepository, $objectivesRepository);
 
 
         new GravityFormsAdapter($userRegistered);
