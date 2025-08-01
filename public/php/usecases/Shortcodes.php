@@ -181,6 +181,17 @@ class Shortcodes
                 if ($formID == FormIds::ACTION_STEPS) {
                     return "<a href='/implement/view-action-steps/' class='$class'><i class='$fontawesome'></i> <h3>View Action Steps</h3></a>";
                 }
+            } elseif ($formID == FormIds::ACTION_STEPS) {
+                $objectivesEntity = $this->objectivesRepository->get_one_for_user(get_current_user_id());
+                if (empty($objectivesEntity)) {
+                    ?>
+                    <script>
+                        jQuery('a[href="/implement/action-steps-and-tasks/]').addClass("smplfy-hidden");
+                        jQuery(".action_steps_heading").addClass("smplfy-hidden");
+                    </script>
+                    <?php
+                }
+
             } else {
                 return "<a href='/' class='smplfy-hidden'><i class='$fontawesome'></i> <h3>View</h3></a>";
             }
