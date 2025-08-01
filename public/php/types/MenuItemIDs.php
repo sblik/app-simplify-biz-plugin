@@ -26,6 +26,9 @@ class MenuItemIDs
     const PROCESS_MONEY                = 100922;
     const PROCESS_RESEARCH_DEVELOPMENT = 100923;
     const PROCESS_LEGAL                = 100924;
+    const VIEW_OBJECTIVES              = 101010;
+    const ADD_ACTION_STEPS_TAKS        = 101016;
+    const VIEW_ACTION_STEPS            = 101017;
 
 
 }

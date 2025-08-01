@@ -16,13 +16,14 @@ class ModifyMenuItems
     private MoneyRepository               $moneyRepository;
     private ResearchDevelopmentRepository $researchDevelopmentRepository;
     private LegalRepository               $legalRepository;
+    private ObjectivesRepository          $objectivesRepository;
 
     public function __construct(StrategyRepository            $strategyRepository, MarketingRepository $marketingProcessRepository, ActionStepsRepository $actionStepsRepository, SalesRepository $salesRepository, LeadershipRepository $leadershipRepository,
                                 OperationsRepository          $operationsRepository,
                                 PeopleRepository              $peopleRepository,
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
-                                LegalRepository               $legalRepository)
+                                LegalRepository               $legalRepository, ObjectivesRepository $objectivesRepository)
     {
         $this->strategyRepository            = $strategyRepository;
         $this->marketingRepository           = $marketingProcessRepository;
@@ -34,6 +35,7 @@ class ModifyMenuItems
         $this->moneyRepository               = $moneyRepository;
         $this->researchDevelopmentRepository = $researchDevelopmentRepository;
         $this->legalRepository               = $legalRepository;
+        $this->objectivesRepository          = $objectivesRepository;
 
     }
 
@@ -41,16 +43,16 @@ class ModifyMenuItems
     {
         $userID = get_current_user_id();
 
-        $strategyEntity   = $this->strategyRepository->get_one_for_user($userID);
-        $marketingEntity  = $this->marketingRepository->get_one_for_user($userID);
-        $salesEntity      = $this->salesRepository->get_one_for_user($userID);
-        $operationsEntity = $this->operationsRepository->get_one_for_user($userID);
-        $leadershipEntity = $this->leadershipRepository->get_one_for_user($userID);
-        $peopleEntity     = $this->peopleRepository->get_one_for_user($userID);
-        $moneyEntity      = $this->moneyRepository->get_one_for_user($userID);
-        $researchEntity   = $this->researchDevelopmentRepository->get_one_for_user($userID);
-        $legalEntity      = $this->legalRepository->get_one_for_user($userID);
-
+        $strategyEntity    = $this->strategyRepository->get_one_for_user($userID);
+        $marketingEntity   = $this->marketingRepository->get_one_for_user($userID);
+        $salesEntity       = $this->salesRepository->get_one_for_user($userID);
+        $operationsEntity  = $this->operationsRepository->get_one_for_user($userID);
+        $leadershipEntity  = $this->leadershipRepository->get_one_for_user($userID);
+        $peopleEntity      = $this->peopleRepository->get_one_for_user($userID);
+        $moneyEntity       = $this->moneyRepository->get_one_for_user($userID);
+        $researchEntity    = $this->researchDevelopmentRepository->get_one_for_user($userID);
+        $legalEntity       = $this->legalRepository->get_one_for_user($userID);
+        $objectivesEntity  = $this->objectivesRepository->get_one_for_user($userID);
         $actionStepsEntity = $this->actionStepsRepository->get_one_for_user($userID);
 
         if (!empty($strategyEntity) && !empty($marketingEntity)) {
@@ -96,6 +98,16 @@ class ModifyMenuItems
             }
             if ($menu_item->ID == MenuItemIDs::PROCESS) {
                 if (empty($leadershipEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::VIEW_OBJECTIVES || $menu_item->ID == MenuItemIDs::ADD_ACTION_STEPS_TAKS) {
+                if (empty($objectivesEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::VIEW_ACTION_STEPS) {
+                if (empty($actionStepsEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
