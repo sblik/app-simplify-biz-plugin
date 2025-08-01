@@ -33,6 +33,7 @@ class DependencyFactory
         $leadershipRepository          = new LeadershipRepository($gravityFormsWrapper);
         $legalRepository               = new LegalRepository($gravityFormsWrapper);
         $objectivesRepository          = new ObjectivesRepository($gravityFormsWrapper);
+        $organisationLookupRepository  = new OrganisationLookupRepository($gravityFormsWrapper);
 
         //Usecases
         $purchaseCompleted = new PurchaseCompleted();
@@ -52,12 +53,13 @@ class DependencyFactory
             $researchDevelopmentRepository,
             $leadershipRepository,
             $legalRepository, $objectivesRepository);
+        $signUp            = new SignUp($organisationLookupRepository);
 
 
         new GravityFormsAdapter($userRegistered);
         new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
-        new MemberpressAdapter($userLogin);
+        new MemberpressAdapter($userLogin, $signUp);
 
     }
 }
