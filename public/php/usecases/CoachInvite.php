@@ -23,6 +23,7 @@ class CoachInvite
     {
         $inviteCoachEntity = new InviteCoachEntity($entry);
         $coachUser         = get_user_by_email($inviteCoachEntity->coachEmail);
+        SMPLFY_Log::info("Coach User: ", $coachUser);
 
         if (!empty($coachUser)) {
             $this->handle_coach_after_invite($coachUser, $inviteCoachEntity);

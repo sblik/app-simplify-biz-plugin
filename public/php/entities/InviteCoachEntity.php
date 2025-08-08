@@ -25,7 +25,7 @@ class InviteCoachEntity extends SMPLFY_BaseEntity
     protected function get_property_map(): array
     {
         return array(
-            'setPasswordLink'  => '2',
+            'setPasswordLink'  => '4',
             'coachUserID'      => '3',
             'coachNameFirst'   => '1.3',
             'coachNameLast'    => '1.6',

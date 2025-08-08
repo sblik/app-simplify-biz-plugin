@@ -27,8 +27,7 @@ class GravityFormsAdapter
     {
         $gform_after_submission = 'gform_after_submission_';
         $gform_pre_submission   = 'gform_pre_submission_';
-
-        add_action('gform_user_registered', [$this->userRegistered, 'handle_ticket_assigned'], 10, 4);
+        
         add_action($gform_after_submission . FormIds::INVITE_COACH, [$this->coachInvite, 'handle_coach_invite_submission'], 10, 3);
 
     }
