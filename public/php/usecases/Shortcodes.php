@@ -55,11 +55,13 @@ class Shortcodes
             'form'        => '',
             'fontawesome' => '',
             'type'        => '',
+            'text'        => '',
         ], $atts, 'smplfy_dashboard_view_shortcode');
 
         $class               = esc_attr($atts['class']);
         $form                = esc_attr($atts['form']);
         $type                = esc_attr($atts['type']);
+        $text                = esc_attr($atts['text']);
         $capitalisedFormName = ucfirst(strtolower($form));
 
         $fontawesome = esc_attr($atts['fontawesome']);
@@ -138,7 +140,7 @@ class Shortcodes
                     $formID = FormIds::ACTION_STEPS;
                 }
                 if (!empty($viewID)) {
-                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID, $type);
+                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID, $type, $text);
                 }
             } catch (Exception $exception) {
                 error_log('Shortcode error: ' . $exception->getMessage()); // Log for debugging
@@ -159,18 +161,18 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type, $text): string
     {
         if (!empty($entity) && $type == '') {
-            return $this->view_or_submit_form_link($formID, $class, $fontawesome, $entity, $viewID, $matches, $capitalisedFormName);
+            return $this->view_or_submit_form_link($formID, $class, $fontawesome, $entity, $viewID, $capitalisedFormName, $text);
         } elseif ($type == 'view') {
             if (!empty($entity)) {
                 //Return Links to multi page view
                 if ($formID == FormIds::OBJECTIVES) {
-                    return "<a href='/implement/view-objectives/' class='$class'><i class='$fontawesome'></i> <h3>View Objectives</h3></a>";
+                    return "<a href='/implement/view-objectives/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
                 }
                 if ($formID == FormIds::ACTION_STEPS) {
-                    return "<a href='/implement/view-action-steps/' class='$class'><i class='$fontawesome'></i> <h3>View Action Steps</h3></a>";
+                    return "<a href='/implement/view-action-steps/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
                 }
             } elseif ($formID == FormIds::ACTION_STEPS) {
                 return $this->hide_action_step_links($fontawesome);
@@ -180,7 +182,7 @@ class Shortcodes
             }
         } else {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
-                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
+                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
             }
             //If all else fails, return link goes to form submission
             $url = SITE_URL . '/start/?id=' . $formID;
@@ -198,10 +200,10 @@ class Shortcodes
      * @param string $capitalisedFormName
      * @return string
      */
-    public function view_or_submit_form_link(int $formID, ?string $class, ?string $fontawesome, LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity, int $viewID, $matches, string $capitalisedFormName): string
+    public function view_or_submit_form_link(int $formID, ?string $class, ?string $fontawesome, LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity, int $viewID, string $capitalisedFormName, $text): string
     {
         if ($formID == FormIds::TARGET_MARKET_REPEATER) {
-            return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>Target Market</h3></a>";
+            return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
         }
 
         $url      = do_shortcode('[gv_entry_link entry_id="' . $entity->id . '" view_id="' . $viewID . '"]Strategy[/gv_entry_link]');
@@ -210,7 +212,7 @@ class Shortcodes
             $viewLink = $matches[1];
         }
         //'smplfy-heading-link smplfy-bg_strategy' 'fa-sharp fa-solid  fa-compass'
-        return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+        return "<a href='$viewLink' class='$class'><i class='$fontawesome'></i> <h3>$text</h3></a>";
     }
 
     /**
