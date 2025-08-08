@@ -20,4 +20,5 @@ class FormIds
     const PROCESS_LEGAL                = 100;
     const ORGANISATION_LOOKUP          = 90;
     const OBJECTIVES                   = 103;
+    const INVITE_COACH                 = 104;
 }

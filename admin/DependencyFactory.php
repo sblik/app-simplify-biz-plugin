@@ -34,6 +34,7 @@ class DependencyFactory
         $legalRepository               = new LegalRepository($gravityFormsWrapper);
         $objectivesRepository          = new ObjectivesRepository($gravityFormsWrapper);
         $organisationLookupRepository  = new OrganisationLookupRepository($gravityFormsWrapper);
+        $inviteCoachRepository         = new InviteCoachRepository($gravityFormsWrapper);
 
         //Usecases
         $purchaseCompleted = new PurchaseCompleted();
@@ -54,9 +55,10 @@ class DependencyFactory
             $leadershipRepository,
             $legalRepository, $objectivesRepository);
         $signUp            = new SignUp($organisationLookupRepository);
+        $coachInvite       = new CoachInvite($inviteCoachRepository);
 
 
-        new GravityFormsAdapter($userRegistered);
+        new GravityFormsAdapter($userRegistered, $coachInvite);
         new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin, $signUp);
