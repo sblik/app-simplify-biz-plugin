@@ -30,7 +30,7 @@ class CoachInvite
 
             $submitterUser = get_user_by('ID', $inviteCoachEntity->createdBy);
             if (!empty($submitterUser)) {
-                UserMeta::store_user_meta($submitterUser->ID, UserMetaKeys::COACH_USER_ID, $coachUser->ID);
+                UserMeta::store_user_meta($coachUser->ID, UserMetaKeys::COACH_USER_ID, $submitterUser->ID);
             } else {
                 SMPLFY_Log::error("Submitter user not found in handle_coach_invite_submission");
             }
