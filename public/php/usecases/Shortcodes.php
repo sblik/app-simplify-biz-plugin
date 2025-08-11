@@ -4,6 +4,7 @@ namespace SMPLFY\appsimplifybiz;
 
 use Exception;
 use SmplfyCore\SMPLFY_Log;
+use SmplfyCore\UserMeta;
 
 class Shortcodes
 {
@@ -235,4 +236,26 @@ class Shortcodes
         return "<a href='/' class='smplfy-hidden'><i class='$fontawesome'></i> <h3>View</h3></a>";
     }
 
+    /**
+     * @param $atts
+     * @return string|null
+     */
+    function coach_filter_shortcode($atts)
+    {
+        // Define default attributes and allow overrides
+        $atts = shortcode_atts([
+            'class' => '',
+        ], $atts, 'smplfy_coach_filter_shortcode');
+
+        $class = esc_attr($atts['class']);
+
+        $userID = get_current_user_id();
+
+        $coachClientUserID = UserMeta::retrieve_user_meta($userID, UserMetaKeys::COACH_USER_ID);
+
+        $shortcode = '[gravityview id="' . ViewIDs::COACH_PROCESS_OPERATIONS . '" search_field="created_by" search_value="' . $coachClientUserID . '"]';
+        SMPLFY_Log::info("Shortcode: ", $shortcode);
+
+        return do_shortcode($shortcode);
+    }
 }

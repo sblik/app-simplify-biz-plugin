@@ -19,4 +19,5 @@ class ViewIDs
     const PROCESS_LEADERSHIP           = 100884;
     const PROCESS_LEGAL                = 100883;
     const OBJECTIVES                   = 101002;
+    const COACH_PROCESS_OPERATIONS     = 101080;
 }

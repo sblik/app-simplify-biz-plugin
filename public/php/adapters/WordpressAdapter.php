@@ -46,5 +46,6 @@ class WordpressAdapter
         add_shortcode('smplfy_marketing_link_shortcode', [$this->shortcodes, 'marketing_plan_link_shortcode']);
         add_shortcode('smplfy_sales_link_shortcode', [$this->shortcodes, 'sales_link_shortcode']);
         add_shortcode('smplfy_dashboard_view_shortcode', [$this->shortcodes, 'dashboard_view_link']);
+        add_shortcode('smplfy_coach_filter_shortcode', [$this->shortcodes, 'coach_filter_shortcode']);
     }
 }
