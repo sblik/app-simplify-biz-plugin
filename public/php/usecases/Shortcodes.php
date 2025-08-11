@@ -251,10 +251,14 @@ class Shortcodes
 
         $userID = get_current_user_id();
 
-        $coachClientUserID = UserMeta::retrieve_user_meta($userID, UserMetaKeys::COACH_USER_ID);
 
-        $shortcode = '[gravityview id="' . ViewIDs::COACH_PROCESS_OPERATIONS . '" search_field="created_by" search_value="' . $coachClientUserID . '"]';
-        SMPLFY_Log::info("Shortcode: ", $shortcode);
+        $coachClientUser = UserMeta::get_user_by_meta(UserMetaKeys::COACH_USER_ID, $userID);
+        SMPLFY_Log::info("Coach client user: ", $coachClientUser);
+        if (!empty($coachClientUser)) {
+            $coachClientUserID = $coachClientUser->ID;
+            $shortcode         = '[gravityview id="' . ViewIDs::COACH_PROCESS_OPERATIONS . '" search_field="created_by" search_value="' . $coachClientUserID . '"]';
+            SMPLFY_Log::info("Shortcode: ", $shortcode);
+        }
 
         return do_shortcode($shortcode);
     }
