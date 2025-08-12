@@ -227,7 +227,7 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::INVITE) {
-                if (!empty($strategyEntity)) {
+                if (empty($strategyEntity)) {
                     $menu_item->title = '';
                     $menu_item->url   = '';
                 }
