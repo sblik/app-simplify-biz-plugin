@@ -245,9 +245,11 @@ class Shortcodes
         // Define default attributes and allow overrides
         $atts = shortcode_atts([
             'class' => '',
+            'form'  => '',
         ], $atts, 'smplfy_coach_filter_shortcode');
 
         $class = esc_attr($atts['class']);
+        $form  = esc_attr($atts['form']);
 
         $userID = get_current_user_id();
 
@@ -256,10 +258,13 @@ class Shortcodes
         SMPLFY_Log::info("Coach client user: ", $coachClientUser);
         if (!empty($coachClientUser)) {
             $coachClientUserID = $coachClientUser->ID;
-            $shortcode         = '[gravityview id="' . ViewIDs::COACH_PROCESS_OPERATIONS . '" search_field="created_by" search_value="' . $coachClientUserID . '"]';
-            SMPLFY_Log::info("Shortcode: ", $shortcode);
+            $link              = 'https://app.simplifybiz.com/coach-view-operations/?gv_by=' . $coachClientUserID . '&mode=any#gv-view-101080-1';
+            SMPLFY_Log::info("Link: ", $link);
+            $html = '<a href="' . $link . '">Click here to view Operations</a>';
+
+        } else {
+            $html = '';
         }
-//
-        return do_shortcode($shortcode);
+        return $html;
     }
 }
