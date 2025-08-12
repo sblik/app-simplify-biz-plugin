@@ -101,6 +101,12 @@ class ModifyMenuItems
                     $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
+            if ($menu_item->ID == MenuItemIDs::PLAN || $menu_item->ID == MenuItemIDs::IMPLEMENT || $menu_item->ID == MenuItemIDs::TRACK || $menu_item->ID == MenuItemIDs::DASHBOARD) {
+                if (empty($strategyEntity)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
+                }
+            }
+
             if ($menu_item->ID == MenuItemIDs::VIEW_OBJECTIVES || $menu_item->ID == MenuItemIDs::ADD_ACTION_STEPS_TAKS) {
                 if (empty($objectivesEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
@@ -153,6 +159,7 @@ class ModifyMenuItems
                     $menu_item->url = $viewLink;
                 }
             }
+
             if ($menu_item->ID == MenuItemIDs::PROCESS_OPERATIONS) {
                 if (empty($operationsEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';

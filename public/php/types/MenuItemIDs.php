@@ -22,6 +22,10 @@ class MenuItemIDs
     const VIEW_OBJECTIVES              = 101010;
     const ADD_ACTION_STEPS_TAKS        = 101016;
     const VIEW_ACTION_STEPS            = 101017;
+    const DASHBOARD                    = 100718;
+    const PLAN                         = 101065;
+    const IMPLEMENT                    = 101005;
+    const TRACK                        = 101066;
 
 
 }
