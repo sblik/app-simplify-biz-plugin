@@ -259,7 +259,7 @@ class Shortcodes
             $shortcode         = '[gravityview id="' . ViewIDs::COACH_PROCESS_OPERATIONS . '" search_field="created_by" search_value="' . $coachClientUserID . '"]';
             SMPLFY_Log::info("Shortcode: ", $shortcode);
         }
-
+//
         return do_shortcode($shortcode);
     }
 }
