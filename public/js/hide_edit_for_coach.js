@@ -19,7 +19,7 @@ jQuery(document).ready(function (jQuery) {
             let canEditEntries = responseJson.canEditEntries;
 
             if (canEditEntries === false) {
-                jQuery('[class*="gv-field-"][class*="-edit_link"]').style.display = 'none !important';
+                jQuery('[class*="gv-field-"][class*="-edit_link"]').addClass('smplfy-hidden');
             }
         });
     }

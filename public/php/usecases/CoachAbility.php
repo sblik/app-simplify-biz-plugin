@@ -49,18 +49,22 @@ class CoachAbility
                                     $returnArray = array("canEditEntries" => false);
                                 }
                                 echo json_encode($returnArray);
+                                die();
                             }
                         } else {
                             $returnArray = array("canEditEntries" => false);
                             echo json_encode($returnArray);
+                            die();
                         }
                     } else {
                         $returnArray = array("canEditEntries" => false);
                         echo json_encode($returnArray);
+                        die();
                     }
                 } else {
                     $returnArray = array("canEditEntries" => false);
                     echo json_encode($returnArray);
+                    die();
                 }
             }
         }
