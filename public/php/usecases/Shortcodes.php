@@ -4,7 +4,9 @@ namespace SMPLFY\appsimplifybiz;
 
 use Exception;
 use SmplfyCore\SMPLFY_Log;
+use SmplfyCore\UserActions;
 use SmplfyCore\UserMeta;
+use WP_User_Query;
 
 class Shortcodes
 {
@@ -67,6 +69,15 @@ class Shortcodes
 
         $fontawesome = esc_attr($atts['fontawesome']);
         $userID      = get_current_user_id();
+
+        $user = get_user_by('ID', $userID);
+
+        if (UserActions::does_user_have_role($user, Roles::COACH)) {
+            $isCoach = true;
+            $userID  = $_GET['client_id'];
+        } else {
+            $isCoach = false;
+        }
 
         $form = strtolower($form);
 
@@ -141,7 +152,7 @@ class Shortcodes
                     $formID = FormIds::ACTION_STEPS;
                 }
                 if (!empty($viewID)) {
-                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID, $type, $text);
+                    return $this->handle_output($entity, $viewID, $class, $fontawesome, $capitalisedFormName, $formID, $type, $text, $isCoach);
                 }
             } catch (Exception $exception) {
                 error_log('Shortcode error: ' . $exception->getMessage()); // Log for debugging
@@ -162,7 +173,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type, $text): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type, $text, $isCoach): string
     {
         if (!empty($entity) && $type == '') {
             return $this->view_or_submit_form_link($formID, $class, $fontawesome, $entity, $viewID, $capitalisedFormName, $text);
@@ -184,6 +195,9 @@ class Shortcodes
         } else {
             if ($formID == FormIds::TARGET_MARKET_REPEATER) {
                 return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
+            }
+            if ($isCoach) {
+                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Client Has Not Submitted</h3></a>";
             }
             //If all else fails, return link goes to form submission
             $url = SITE_URL . '/start/?id=' . $formID;
@@ -240,7 +254,7 @@ class Shortcodes
      * @param $atts
      * @return string|null
      */
-    function coach_filter_shortcode($atts)
+    function coach_clients_shortcode($atts)
     {
         // Define default attributes and allow overrides
         $atts = shortcode_atts([
@@ -253,18 +267,57 @@ class Shortcodes
 
         $userID = get_current_user_id();
 
+        $args = [
+            'meta_key'   => UserMetaKeys::COACH_USER_ID,
+            'meta_value' => $userID,
+            'number'     => 99, // Limit to one result
+        ];
 
-        $coachClientUser = UserMeta::get_user_by_meta(UserMetaKeys::COACH_USER_ID, $userID);
-        SMPLFY_Log::info("Coach client user: ", $coachClientUser);
-        if (!empty($coachClientUser)) {
-            $coachClientUserID = $coachClientUser->ID;
-            $link              = 'https://app.simplifybiz.com/coach-view-operations/?gv_by=' . $coachClientUserID . '&mode=any#gv-view-101080-1';
-            SMPLFY_Log::info("Link: ", $link);
-            $html = '<a href="' . $link . '">Click here to view Operations</a>';
-
+        $user_query = new WP_User_Query($args);
+        if (!empty($user_query->get_results())) {
+            $users = $user_query->get_results();
         } else {
-            $html = '';
+            $users = null;
         }
-        return $html;
+        if (!empty($users)) { ?>
+            <table class="user-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Registered</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($users as $u): ?>
+                    <?php
+                    // Determine link target for the name
+                    if ($atts['link_template'] === 'author') {
+                        $href = get_author_posts_url($u->ID);
+                    } else {
+                        // Custom pattern, e.g. "/member/?user_id=%d"
+                        $href = sprintf($atts['link_template'], (int)$u->ID);
+                    }
+                    ?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo esc_url($href); ?>">
+                                <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="mailto:<?php echo esc_attr($u->user_email); ?>">
+                                <?php echo esc_html($u->user_email); ?>
+                            </a>
+                        </td>
+                        <td><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($u->user_registered))); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <?php
+            return ob_get_clean();
+        }
     }
 }
