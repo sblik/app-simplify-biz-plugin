@@ -7,12 +7,14 @@ class WordpressAdapter
     private UserLogin       $userLogin;
     private ModifyMenuItems $modifyMenuItems;
     private Shortcodes      $shortcodes;
+    private CoachAbility    $coachAbility;
 
-    public function __construct(UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes)
+    public function __construct(UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes, CoachAbility $coachAbility)
     {
         $this->userLogin       = $userLogin;
         $this->modifyMenuItems = $modifyMenuItems;
         $this->shortcodes      = $shortcodes;
+        $this->coachAbility    = $coachAbility;
 
         $this->register_hooks();
         $this->register_filters();
@@ -26,6 +28,8 @@ class WordpressAdapter
      */
     public function register_hooks()
     {
+        add_action('wp_ajax_can_coach_edit_entries', [$this->coachAbility, 'can_coach_edit_entries']);
+        add_action('wp_ajax_nopriv_can_coach_edit_entries', [$this->coachAbility, 'can_coach_edit_entries']);
 
     }
 

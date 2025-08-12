@@ -25,6 +25,9 @@ function enqueue_appsimplifybiz_frontend_scripts()
 
     wp_register_script('smplfy-demo-frontend-script', SMPLFY_NAME_PLUGIN_URL . 'public/js/frontend.js', array('jquery'), null, true);
     wp_enqueue_script('smplfy-demo-frontend-script');
+
+    wp_register_script('smplfy-hide-coach-edit-script', SMPLFY_NAME_PLUGIN_URL . 'public/js/hide_edit_for_coach.js', array('jquery'), null, true);
+    wp_enqueue_script('smplfy-hide-coach-edit-script');
     //Ensure our heartbeat script only runs on the page we want it to, to avoid excessive computation on the client side
     if ($post->ID == 999) {
         wp_enqueue_script('smplfy-demo-heartbeat-script');

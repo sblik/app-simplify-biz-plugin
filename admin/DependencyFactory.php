@@ -56,10 +56,11 @@ class DependencyFactory
             $legalRepository, $objectivesRepository);
         $signUp            = new SignUp($organisationLookupRepository);
         $coachInvite       = new CoachInvite($inviteCoachRepository);
+        $coachAbility      = new CoachAbility($inviteCoachRepository);
 
 
         new GravityFormsAdapter($userRegistered, $coachInvite);
-        new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes);
+        new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes, $coachAbility);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin, $signUp);
 

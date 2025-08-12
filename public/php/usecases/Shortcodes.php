@@ -197,11 +197,11 @@ class Shortcodes
                 return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
             }
             if ($isCoach) {
-                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Client Has Not Submitted</h3></a>";
+                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Not Submitted</h3></a>";
             }
             //If all else fails, return link goes to form submission
             $url = SITE_URL . '/start/?id=' . $formID;
-            return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName</h3></a>";
+            return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Not Submitted</h3></a>";
         }
     }
 
@@ -280,41 +280,39 @@ class Shortcodes
             $users = null;
         }
         if (!empty($users)) { ?>
-            <table class="user-table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Registered</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($users as $u): ?>
-                    <?php
-                    // Determine link target for the name
-                    if ($atts['link_template'] === 'author') {
-                        $href = get_author_posts_url($u->ID);
-                    } else {
-                        // Custom pattern, e.g. "/member/?user_id=%d"
-                        $href = sprintf($atts['link_template'], (int)$u->ID);
-                    }
-                    ?>
+            <div>
+                <table class="user-table">
+                    <thead>
                     <tr>
-                        <td>
-                            <a href="<?php echo esc_url($href); ?>">
-                                <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="mailto:<?php echo esc_attr($u->user_email); ?>">
-                                <?php echo esc_html($u->user_email); ?>
-                            </a>
-                        </td>
-                        <td><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($u->user_registered))); ?></td>
+                        <th>Name</th>
+                        <th>Email</th>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($users as $u): ?>
+                        <?php
+                        // Determine link target for the name
+                        if ($atts['link_template'] === 'author') {
+                            $href = get_author_posts_url($u->ID);
+                        } else {
+                            // Custom pattern, e.g. "/member/?user_id=%d"
+                            $href = sprintf($atts['link_template'], (int)$u->ID);
+                        }
+                        ?>
+                        <tr>
+                            <td>
+                                <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
+                            </td>
+                            <td>
+                                <a href="/dashboard?client_id=<?php echo $u->ID ?>">
+                                    View Dashboard
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
 
             <?php
             return ob_get_clean();

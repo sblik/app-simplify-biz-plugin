@@ -3,6 +3,7 @@
 namespace SMPLFY\appsimplifybiz;
 
 use SmplfyCore\SMPLFY_Log;
+use function GravityKit\GravityView\Foundation\ThirdParty\Illuminate\Support\e;
 
 class ModifyMenuItems
 {
@@ -223,6 +224,12 @@ class ModifyMenuItems
                         $viewLink = $matches[1];
                     }
                     $menu_item->url = $viewLink;
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::INVITE) {
+                if (!empty($strategyEntity)) {
+                    $menu_item->title = '';
+                    $menu_item->url   = '';
                 }
             }
         }
