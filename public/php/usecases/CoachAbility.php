@@ -69,4 +69,23 @@ class CoachAbility
             }
         }
     }
+
+    /**
+     * @param $entry
+     * @param $form
+     * @return void
+     */
+    public function handle_coach_removal($entry, $form): void
+    {
+        $removeCoachEntity = new RemoveCoachEntity($entry);
+        $submitterUserID   = get_current_user_id();
+
+        $coachIDInRecord = UserMeta::retrieve_user_meta($submitterUserID, UserMetaKeys::COACH_USER_ID);
+        $coachIDInEntry  = $removeCoachEntity->coachUserID;
+
+        if ($coachIDInEntry == $coachIDInRecord) {
+            //Remove Coach ID from user meta
+            UserMeta::store_user_meta($submitterUserID, UserMetaKeys::COACH_USER_ID, '');
+        }
+    }
 }

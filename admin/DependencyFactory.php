@@ -59,7 +59,7 @@ class DependencyFactory
         $coachAbility      = new CoachAbility($inviteCoachRepository);
 
 
-        new GravityFormsAdapter($userRegistered, $coachInvite);
+        new GravityFormsAdapter($userRegistered, $coachInvite, $coachAbility);
         new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes, $coachAbility);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin, $signUp);

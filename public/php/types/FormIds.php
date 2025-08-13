@@ -21,4 +21,5 @@ class FormIds
     const ORGANISATION_LOOKUP          = 90;
     const OBJECTIVES                   = 103;
     const INVITE_COACH                 = 104;
+    const REMOVE_COACH                 = 105;
 }
