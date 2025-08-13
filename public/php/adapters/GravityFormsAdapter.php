@@ -14,6 +14,7 @@ class GravityFormsAdapter
     {
         $this->userRegistered = $userRegistered;
         $this->coachInvite    = $coachInvite;
+        $this->coachAbility   = $coachAbility;
 
         $this->register_hooks();
         $this->register_filters();
