@@ -51,5 +51,6 @@ class WordpressAdapter
         add_shortcode('smplfy_sales_link_shortcode', [$this->shortcodes, 'sales_link_shortcode']);
         add_shortcode('smplfy_dashboard_view_shortcode', [$this->shortcodes, 'dashboard_view_link']);
         add_shortcode('smplfy_coach_filter_shortcode', [$this->shortcodes, 'coach_clients_shortcode']);
+        add_shortcode('smplfy_terms_of_service', [$this->shortcodes, 'terms_of_service_link']);
     }
 }
