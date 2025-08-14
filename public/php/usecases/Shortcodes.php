@@ -337,4 +337,21 @@ class Shortcodes
         return '<a href="https://app.simplifybiz.com/terms-of-service/">Terms of Service</a>';
     }
 
+    /**
+     * @param $atts
+     * @return string|null
+     */
+    function privacy_policy_link($atts)
+    {
+        // Define default attributes and allow overrides
+        $atts = shortcode_atts([
+            'class' => '',
+            'form'  => '',
+        ], $atts, 'smplfy_privacy_policy');
+
+        $class = esc_attr($atts['class']);
+        $form  = esc_attr($atts['form']);
+
+        return '<a href="https://app.simplifybiz.com/privacy-policy/">Privacy Policy</a>';
+    }
 }
