@@ -197,11 +197,11 @@ class Shortcodes
                 return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
             }
             if ($isCoach) {
-                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Not Submitted</h3></a>";
+                return "<a href='/' class='$class'><i class='$fontawesome'></i> <h3>Not submitted</h3></a>";
             }
             //If all else fails, return link goes to form submission
             $url = SITE_URL . '/start/?id=' . $formID;
-            return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>Not Submitted</h3></a>";
+            return "<a href='$url' class='$class'><i class='$fontawesome'></i> <h3>$capitalisedFormName </h3><p>Not submitted</p></a>";
         }
     }
 
