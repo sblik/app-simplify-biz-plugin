@@ -2,6 +2,7 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use MeprUser;
 use SmplfyCore\SMPLFY_Log;
 use SmplfyCore\UserActions;
 use WP_User;
@@ -36,7 +37,15 @@ class UserLogin
         if (UserActions::does_user_have_role($user, 'administrator')) {
             return '/wp-admin';
         }
+        if (UserActions::does_user_have_role($user, Roles::COACH)) {
+            $mepr_user = new MeprUser($user->ID);
 
+            if ($mepr_user->is_active_on_membership(Memberships::COACH)) {
+                return '/coach-view-operations/';
+            } else {
+                return '/coach-pricing';
+            }
+        }
         if (!empty($strategyEntity) && !empty($marketingEntity)) {
             return '/dashboard/';
         } else {
