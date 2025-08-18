@@ -25,12 +25,12 @@ use SmplfyCore\SMPLFY_BaseEntity;
  * @property $systemsRepeater
  * @property $status
  */
-class LegalEntity extends SMPLFY_BaseEntity
+class RiskEntity extends SMPLFY_BaseEntity
 {
     public function __construct($formEntry = array())
     {
         parent::__construct($formEntry);
-        $this->formId = FormIds::PROCESS_LEGAL;
+        $this->formId = FormIds::PROCESS_RISK;
     }
 
     protected function get_property_map(): array

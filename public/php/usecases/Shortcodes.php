@@ -20,7 +20,7 @@ class Shortcodes
     private MoneyRepository                $moneyRepository;
     private ResearchDevelopmentRepository  $researchDevelopmentRepository;
     private LeadershipRepository           $leadershipRepository;
-    private LegalRepository                $legalRepository;
+    private RiskRepository                 $riskRepository;
     private ObjectivesRepository           $objectivesRepository;
 
     public function __construct(StrategyRepository            $strategyRepository,
@@ -30,7 +30,7 @@ class Shortcodes
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
                                 LeadershipRepository          $leadershipRepository,
-                                LegalRepository               $legalRepository, ObjectivesRepository $objectivesRepository)
+                                RiskRepository                $riskRepository, ObjectivesRepository $objectivesRepository)
     {
         $this->strategyRepository             = $strategyRepository;
         $this->marketingProcessRepository     = $marketingProcessRepository;
@@ -41,7 +41,7 @@ class Shortcodes
         $this->moneyRepository                = $moneyRepository;
         $this->researchDevelopmentRepository  = $researchDevelopmentRepository;
         $this->leadershipRepository           = $leadershipRepository;
-        $this->legalRepository                = $legalRepository;
+        $this->riskRepository                 = $riskRepository;
         $this->targetMarketRepeaterRepository = $targetMarketRepeaterRepository;
         $this->objectivesRepository           = $objectivesRepository;
     }
@@ -136,10 +136,10 @@ class Shortcodes
                     $viewID = ViewIDs::PROCESS_LEADERSHIP;
                     $formID = FormIds::PROCESS_LEADERSHIP;
                 }
-                if ($form == 'legal') {
-                    $entity = $this->legalRepository->get_one_for_user($userID);
-                    $viewID = ViewIDs::PROCESS_LEGAL;
-                    $formID = FormIds::PROCESS_LEGAL;
+                if ($form == 'risk') {
+                    $entity = $this->riskRepository->get_one_for_user($userID);
+                    $viewID = ViewIDs::PROCESS_RISK;
+                    $formID = FormIds::PROCESS_RISK;
                 }
                 if ($form == 'objectives') {
                     $entity = $this->objectivesRepository->get_one_for_user($userID);
@@ -173,7 +173,7 @@ class Shortcodes
      * @param int $formID
      * @return string
      */
-    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|LegalEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type, $text, $isCoach): string
+    public function handle_output(MarketingEntity|SalesEntity|StrategyEntity|OperationsEntity|PeopleEntity|ResearchDevelopmentEntity|MoneyEntity|RiskEntity|LeadershipEntity|ObjectivesEntity|ActionStepsEntity|array|null $entity, int $viewID, ?string $class, ?string $fontawesome, string $capitalisedFormName, int $formID, $type, $text, $isCoach): string
     {
         if (!empty($entity) && $type == '') {
             return $this->view_or_submit_form_link($formID, $class, $fontawesome, $entity, $viewID, $capitalisedFormName, $text);
@@ -209,13 +209,13 @@ class Shortcodes
      * @param int $formID
      * @param string|null $class
      * @param string|null $fontawesome
-     * @param LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity
+     * @param LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|RiskEntity|OperationsEntity|StrategyEntity $entity
      * @param int $viewID
      * @param $matches
      * @param string $capitalisedFormName
      * @return string
      */
-    public function view_or_submit_form_link(int $formID, ?string $class, ?string $fontawesome, LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|LegalEntity|OperationsEntity|StrategyEntity $entity, int $viewID, string $capitalisedFormName, $text): string
+    public function view_or_submit_form_link(int $formID, ?string $class, ?string $fontawesome, LeadershipEntity|SalesEntity|ActionStepsEntity|ResearchDevelopmentEntity|ObjectivesEntity|PeopleEntity|MarketingEntity|array|MoneyEntity|RiskEntity|OperationsEntity|StrategyEntity $entity, int $viewID, string $capitalisedFormName, $text): string
     {
         if ($formID == FormIds::TARGET_MARKET_REPEATER) {
             return "<a href='/view/overview-target-markets/' class='$class'><i class='$fontawesome'></i> <h3>" . $text . "</h3></a>";
@@ -254,7 +254,7 @@ class Shortcodes
      * @param $atts
      * @return string|null
      */
-    function coach_clients_shortcode($atts)
+    function coach_clients_shortcode($atts): ?string
     {
         // Define default attributes and allow overrides
         $atts = shortcode_atts([

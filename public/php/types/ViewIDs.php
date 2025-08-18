@@ -17,7 +17,7 @@ class ViewIDs
     const PROCESS_MONEY                = 100882;
     const PROCESS_RESEARCH_DEVELOPMENT = 100885;
     const PROCESS_LEADERSHIP           = 100884;
-    const PROCESS_LEGAL                = 100883;
+    const PROCESS_RISK                 = 100883;
     const OBJECTIVES                   = 101002;
     const COACH_PROCESS_OPERATIONS     = 101080;
 }

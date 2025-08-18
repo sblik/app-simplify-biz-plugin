@@ -31,7 +31,7 @@ class DependencyFactory
         $moneyRepository               = new MoneyRepository($gravityFormsWrapper);
         $researchDevelopmentRepository = new ResearchDevelopmentRepository($gravityFormsWrapper);
         $leadershipRepository          = new LeadershipRepository($gravityFormsWrapper);
-        $legalRepository               = new LegalRepository($gravityFormsWrapper);
+        $riskRepository                = new RiskRepository($gravityFormsWrapper);
         $objectivesRepository          = new ObjectivesRepository($gravityFormsWrapper);
         $organisationLookupRepository  = new OrganisationLookupRepository($gravityFormsWrapper);
         $inviteCoachRepository         = new InviteCoachRepository($gravityFormsWrapper);
@@ -46,14 +46,14 @@ class DependencyFactory
             $peopleRepository,
             $moneyRepository,
             $researchDevelopmentRepository,
-            $legalRepository, $objectivesRepository);
+            $riskRepository, $objectivesRepository);
         $shortcodes        = new Shortcodes($strategyRepository, $marketingRepository, $tasksRepository, $processSalesRepository, $targetMarketRepeaterRepository,
             $operationsRepository,
             $peopleRepository,
             $moneyRepository,
             $researchDevelopmentRepository,
             $leadershipRepository,
-            $legalRepository, $objectivesRepository);
+            $riskRepository, $objectivesRepository);
         $signUp            = new SignUp($organisationLookupRepository);
         $coachInvite       = new CoachInvite($inviteCoachRepository);
         $coachAbility      = new CoachAbility($inviteCoachRepository);

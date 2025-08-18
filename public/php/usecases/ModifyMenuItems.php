@@ -16,7 +16,7 @@ class ModifyMenuItems
     private PeopleRepository              $peopleRepository;
     private MoneyRepository               $moneyRepository;
     private ResearchDevelopmentRepository $researchDevelopmentRepository;
-    private LegalRepository               $legalRepository;
+    private RiskRepository                $riskRepository;
     private ObjectivesRepository          $objectivesRepository;
 
     public function __construct(StrategyRepository            $strategyRepository, MarketingRepository $marketingProcessRepository, ActionStepsRepository $actionStepsRepository, SalesRepository $salesRepository, LeadershipRepository $leadershipRepository,
@@ -24,7 +24,7 @@ class ModifyMenuItems
                                 PeopleRepository              $peopleRepository,
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
-                                LegalRepository               $legalRepository, ObjectivesRepository $objectivesRepository)
+                                RiskRepository                $riskRepository, ObjectivesRepository $objectivesRepository)
     {
         $this->strategyRepository            = $strategyRepository;
         $this->marketingRepository           = $marketingProcessRepository;
@@ -35,7 +35,7 @@ class ModifyMenuItems
         $this->peopleRepository              = $peopleRepository;
         $this->moneyRepository               = $moneyRepository;
         $this->researchDevelopmentRepository = $researchDevelopmentRepository;
-        $this->legalRepository               = $legalRepository;
+        $this->riskRepository                = $riskRepository;
         $this->objectivesRepository          = $objectivesRepository;
 
     }
@@ -52,7 +52,7 @@ class ModifyMenuItems
         $peopleEntity      = $this->peopleRepository->get_one_for_user($userID);
         $moneyEntity       = $this->moneyRepository->get_one_for_user($userID);
         $researchEntity    = $this->researchDevelopmentRepository->get_one_for_user($userID);
-        $legalEntity       = $this->legalRepository->get_one_for_user($userID);
+        $riskEntity        = $this->riskRepository->get_one_for_user($userID);
         $objectivesEntity  = $this->objectivesRepository->get_one_for_user($userID);
         $actionStepsEntity = $this->actionStepsRepository->get_one_for_user($userID);
 
@@ -214,11 +214,11 @@ class ModifyMenuItems
                 }
             }
             if ($menu_item->ID == MenuItemIDs::PROCESS_LEGAL) {
-                if (empty($legalEntity)) {
+                if (empty($riskEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 } else {
-                    $entryID  = $legalEntity->id;
-                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_LEGAL . '"]Legal[/gv_entry_link]');
+                    $entryID  = $riskEntity->id;
+                    $url      = do_shortcode('[gv_entry_link entry_id="' . $entryID . '" view_id="' . ViewIDs::PROCESS_RISK . '"]Legal[/gv_entry_link]');
                     $viewLink = '';
                     if (preg_match('/href="([^"]+)"/', $url, $matches)) {
                         $viewLink = $matches[1];
