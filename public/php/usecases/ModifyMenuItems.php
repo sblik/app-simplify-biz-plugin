@@ -2,6 +2,7 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use MeprUser;
 use SmplfyCore\SMPLFY_Log;
 use function GravityKit\GravityView\Foundation\ThirdParty\Illuminate\Support\e;
 
@@ -68,6 +69,13 @@ class ModifyMenuItems
                 if ($startCompleted) {
                     $menu_item->title = '';
                     $menu_item->url   = '';
+                }
+            }
+            if ($menu_item->ID == MenuItemIDs::COACH_OPERATIONS) {
+                get_current_user_id();
+                $mepr_user = new MeprUser(get_current_user_id());
+                if (!$mepr_user->is_active_on_membership(Memberships::COACH)) {
+                    $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }
             if ($menu_item->ID == MenuItemIDs::STRATEGY) {

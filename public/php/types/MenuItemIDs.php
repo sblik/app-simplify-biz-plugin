@@ -27,6 +27,7 @@ class MenuItemIDs
     const IMPLEMENT                    = 101005;
     const TRACK                        = 101066;
     const INVITE                       = 101103;
+    const COACH_OPERATIONS             = 101105;
 
 
 }
