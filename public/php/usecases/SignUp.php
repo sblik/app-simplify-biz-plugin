@@ -2,6 +2,7 @@
 
 namespace SMPLFY\appsimplifybiz;
 
+use MeprUser;
 use SmplfyCore\SMPLFY_Log;
 use SmplfyCore\UserActions;
 use SmplfyCore\UserMeta;
@@ -39,6 +40,15 @@ class SignUp
             $organisationLookupEntity->organisationName = $organisation;
 
             $this->organisationLookupRepository->add($organisationLookupEntity);
+        }
+    }
+
+    function mepr_custom_thankyou_message_fn($message)
+    {
+        $mepr_user = new MeprUser(get_current_user_id());
+
+        if ($mepr_user->is_active_on_membership(Memberships::COACH)) {
+            wp_redirect('app.simplifybiz.com/coach-view-operations/');
         }
     }
 }

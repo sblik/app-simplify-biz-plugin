@@ -36,5 +36,6 @@ class MemberpressAdapter
     public function register_filters()
     {
         add_filter('mepr-process-login-redirect-url', [$this->userLogin, 'handle_redirect'], 11, 2);
+        add_filter('mepr_custom_thankyou_message', [$this->signUp, 'mepr_custom_thankyou_message_fn']);
     }
 }
