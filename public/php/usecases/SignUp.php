@@ -43,12 +43,20 @@ class SignUp
         }
     }
 
-    function mepr_custom_thankyou_message_fn($message)
+    /**
+     * @param $redirect_url
+     * @param $delim
+     * @param $uri
+     * @return mixed|string
+     */
+    function redirect_coach_unauthorised($redirect_url, $delim, $uri): mixed
     {
         $mepr_user = new MeprUser(get_current_user_id());
 
         if ($mepr_user->is_active_on_membership(Memberships::COACH)) {
-            wp_redirect('app.simplifybiz.com/coach-view-operations/');
+            $redirect_url = 'app.simplifybiz.com/coach-view-operations/';
         }
+
+        return $redirect_url;
     }
 }
