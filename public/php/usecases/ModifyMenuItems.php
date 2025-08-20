@@ -117,7 +117,7 @@ class ModifyMenuItems
             }
 
             if ($menu_item->ID == MenuItemIDs::VIEW_OBJECTIVES || $menu_item->ID == MenuItemIDs::ADD_ACTION_STEPS_TAKS) {
-                if (empty($objectivesEntity)) {
+                if (empty($strategyEntity)) {
                     $menu_item->classes[0] = 'smplfy-hidden';
                 }
             }

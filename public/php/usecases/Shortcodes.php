@@ -142,7 +142,7 @@ class Shortcodes
                     $formID = FormIds::PROCESS_RISK;
                 }
                 if ($form == 'objectives') {
-                    $entity = $this->objectivesRepository->get_one_for_user($userID);
+                    $entity = $this->strategyRepository->get_one_for_user($userID);
                     $viewID = ViewIDs::OBJECTIVES;
                     $formID = FormIds::OBJECTIVES;
                 }
