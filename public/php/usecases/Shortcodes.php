@@ -149,7 +149,7 @@ class Shortcodes
                     $formID = FormIds::OBJECTIVES;
                 }
                 if ($form == 'action_steps') {
-                    $entity = $this->actionStepsRepository->get_one_for_user($userID);
+                    $entity = $this->objectivesRepository->get_one_for_user($userID); //Use objectives as entity as when it exists, action steps can be seen
                     $viewID = ViewIDs::ACTION_STEPS;
                     $formID = FormIds::ACTION_STEPS;
                 }
