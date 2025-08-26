@@ -72,7 +72,9 @@ class Shortcodes
 
         $user = get_user_by('ID', $userID);
 
-        if (UserActions::does_user_have_role($user, Roles::COACH)) {
+        $queryUserID = $_GET['client_id'];
+
+        if (UserActions::does_user_have_role($user, Roles::COACH) && !empty($queryUserID)) {
             $isCoach = true;
             $userID  = $_GET['client_id'];
         } else {
