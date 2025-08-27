@@ -272,7 +272,7 @@ class Shortcodes
         $args = [
             'meta_key'   => UserMetaKeys::COACH_USER_ID,
             'meta_value' => $userID,
-            'number'     => 99, // Limit to one result
+            'number'     => 99,
         ];
 
         $user_query = new WP_User_Query($args);
@@ -315,11 +315,10 @@ class Shortcodes
                     </tbody>
                 </table>
             </div>
-
             <?php
-            return ob_get_clean();
+        } else {
+            return "<p>No clients</p>";
         }
-        return "<p>No clients</p>";
     }
 
     /**
