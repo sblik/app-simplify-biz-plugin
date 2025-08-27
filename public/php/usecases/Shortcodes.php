@@ -45,6 +45,7 @@ class Shortcodes
         $this->riskRepository                 = $riskRepository;
         $this->targetMarketRepeaterRepository = $targetMarketRepeaterRepository;
         $this->objectivesRepository           = $objectivesRepository;
+        $this->inviteCoachRepository          = $inviteCoachRepository;
     }
 
     /**
