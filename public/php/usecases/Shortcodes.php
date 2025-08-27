@@ -306,10 +306,12 @@ class Shortcodes
                         SMPLFY_Log::info("Coach invite entry: ", $coachInviteEntity);
 
                         if ($abilities == 'View AND Edit') {
-                            $shortcode = '[smplfy_get_switch_to_link user="' . $userID . '"]';
-                            $link      = do_shortcode($shortcode);
+                            $shortcode = '[smplfy_get_switch_to_link user="' . $u->ID . '"]';
+                            $output    = do_shortcode($shortcode);
                         } else {
-                            $link = "/dashboard?client_id=$u->ID";
+                            $output = "<a href='/dashboard?client_id=$u->ID'>
+                                View Dashboard
+                            </a>";
                         }
                         // Determine link target for the name
                         if ($atts['link_template'] === 'author') {
@@ -324,9 +326,7 @@ class Shortcodes
                                 <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
                             </td>
                             <td>
-                                <a href="<?php echo $link ?>">
-                                    View Dashboard
-                                </a>
+                                <?php echo $output ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
