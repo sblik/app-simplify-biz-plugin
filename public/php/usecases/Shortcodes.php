@@ -22,6 +22,7 @@ class Shortcodes
     private LeadershipRepository           $leadershipRepository;
     private RiskRepository                 $riskRepository;
     private ObjectivesRepository           $objectivesRepository;
+    private InviteCoachRepository          $inviteCoachRepository;
 
     public function __construct(StrategyRepository            $strategyRepository,
                                 MarketingRepository           $marketingProcessRepository, ActionStepsRepository $actionStepsRepository,
@@ -30,7 +31,7 @@ class Shortcodes
                                 MoneyRepository               $moneyRepository,
                                 ResearchDevelopmentRepository $researchDevelopmentRepository,
                                 LeadershipRepository          $leadershipRepository,
-                                RiskRepository                $riskRepository, ObjectivesRepository $objectivesRepository)
+                                RiskRepository                $riskRepository, ObjectivesRepository $objectivesRepository, InviteCoachRepository $inviteCoachRepository)
     {
         $this->strategyRepository             = $strategyRepository;
         $this->marketingProcessRepository     = $marketingProcessRepository;
@@ -293,6 +294,15 @@ class Shortcodes
                     <tbody>
                     <?php foreach ($users as $u): ?>
                         <?php
+                        $coachInviteEntity = $this->inviteCoachRepository->get_one_for_user($u->ID);
+                        $abilities         = $coachInviteEntity->coachPermissions;
+
+                        if ($abilities == 'View AND Edit') {
+                            $shortcode = '[smplfy_get_switch_to_link user="' . $userID . '"]';
+                            $link      = do_shortcode($shortcode);
+                        } else {
+                            $link = "/dashboard?client_id=<?php echo $u->ID ?>";
+                        }
                         // Determine link target for the name
                         if ($atts['link_template'] === 'author') {
                             $href = get_author_posts_url($u->ID);
@@ -306,7 +316,7 @@ class Shortcodes
                                 <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
                             </td>
                             <td>
-                                <a href="/dashboard?client_id=<?php echo $u->ID ?>">
+                                <a href="<?php echo $link ?>">
                                     View Dashboard
                                 </a>
                             </td>

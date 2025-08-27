@@ -53,14 +53,15 @@ class DependencyFactory
             $moneyRepository,
             $researchDevelopmentRepository,
             $leadershipRepository,
-            $riskRepository, $objectivesRepository);
+            $riskRepository, $objectivesRepository, $inviteCoachRepository);
         $signUp            = new SignUp($organisationLookupRepository);
         $coachInvite       = new CoachInvite($inviteCoachRepository);
         $coachAbility      = new CoachAbility($inviteCoachRepository);
+        $switchTo          = new SwitchTo();
 
 
         new GravityFormsAdapter($userRegistered, $coachInvite, $coachAbility);
-        new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes, $coachAbility);
+        new WordpressAdapter($userLogin, $modifyMenuItems, $shortcodes, $coachAbility, $switchTo);
         new WooCommerceAdapter($purchaseCompleted, $checkout);
         new MemberpressAdapter($userLogin, $signUp);
 

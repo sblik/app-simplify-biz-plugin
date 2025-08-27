@@ -8,13 +8,15 @@ class WordpressAdapter
     private ModifyMenuItems $modifyMenuItems;
     private Shortcodes      $shortcodes;
     private CoachAbility    $coachAbility;
+    private SwitchTo        $switchTo;
 
-    public function __construct(UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes, CoachAbility $coachAbility)
+    public function __construct(UserLogin $userLogin, ModifyMenuItems $modifyMenuItems, Shortcodes $shortcodes, CoachAbility $coachAbility, SwitchTo $switchTo)
     {
         $this->userLogin       = $userLogin;
         $this->modifyMenuItems = $modifyMenuItems;
         $this->shortcodes      = $shortcodes;
         $this->coachAbility    = $coachAbility;
+        $this->switchTo        = $switchTo;
 
         $this->register_hooks();
         $this->register_filters();
@@ -54,5 +56,7 @@ class WordpressAdapter
         add_shortcode('smplfy_terms_of_service', [$this->shortcodes, 'terms_of_service_link']);
         add_shortcode('smplfy_privacy_policy', [$this->shortcodes, 'privacy_policy_link']);
         add_shortcode('smplfy_organisation_name', [$this->shortcodes, 'display_organisation_heading']);
+        add_shortcode('smplfy_get_switch_to_link', [$this->switchTo, 'get_switch_to_link_shortcode']);
+
     }
 }
