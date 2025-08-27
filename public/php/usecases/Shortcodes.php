@@ -302,7 +302,7 @@ class Shortcodes
                             $shortcode = '[smplfy_get_switch_to_link user="' . $userID . '"]';
                             $link      = do_shortcode($shortcode);
                         } else {
-                            $link = "/dashboard?client_id=<?php echo $u->ID ?>";
+                            $link = "/dashboard?client_id=$u->ID";
                         }
                         // Determine link target for the name
                         if ($atts['link_template'] === 'author') {
