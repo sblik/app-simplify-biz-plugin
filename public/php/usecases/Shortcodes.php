@@ -319,6 +319,7 @@ class Shortcodes
             <?php
             return ob_get_clean();
         }
+        return "<p>No clients</p>";
     }
 
     /**
