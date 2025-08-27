@@ -282,7 +282,7 @@ class Shortcodes
             $users = null;
         }
         if (!empty($users)) { ?>
-            <div>
+            <div id="coach-clients-container">
                 <table class="user-table">
                     <thead>
                     <tr>
