@@ -53,5 +53,6 @@ class WordpressAdapter
         add_shortcode('smplfy_coach_filter_shortcode', [$this->shortcodes, 'coach_clients_shortcode']);
         add_shortcode('smplfy_terms_of_service', [$this->shortcodes, 'terms_of_service_link']);
         add_shortcode('smplfy_privacy_policy', [$this->shortcodes, 'privacy_policy_link']);
+        add_shortcode('smplfy_organisation_name', [$this->shortcodes, 'display_organisation_heading']);
     }
 }

@@ -343,6 +343,31 @@ class Shortcodes
      * @param $atts
      * @return string|null
      */
+    function display_organisation_heading($atts): ?string
+    {
+        // Define default attributes and allow overrides
+        $atts = shortcode_atts([
+            'class' => '',
+        ], $atts, 'smplfy_organisation_name');
+
+        $class = esc_attr($atts['class']);
+
+        $userID = get_current_user_id();
+
+        $organisationName = UserMeta::retrieve_user_meta($userID, UserMetaKeys::ORGANISATION);
+
+        if (!empty($organisationName)) {
+            return '<h2>' . $organisationName . '</h2>';
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
+     * @param $atts
+     * @return string|null
+     */
     function privacy_policy_link($atts)
     {
         // Define default attributes and allow overrides
