@@ -30,9 +30,13 @@ class CoachAbility
 
                 $clientUser = get_user_by('ID', $clientUserID);
                 if (!empty($clientUser)) {
-                    $coachID = UserMeta::retrieve_user_meta($clientUserID, UserMetaKeys::COACH_USER_ID);
+                    $coachID     = UserMeta::retrieve_user_meta($clientUserID, UserMetaKeys::COACH_USER_ID);
+                    $coachUserID = get_current_user_id();
+                    $coachUser   = get_user_by('ID', $coachUserID);
                     if (!empty($coachID)) {
-                        $coachInviteEntity = $this->inviteCoachRepository->get_one_for_user($clientUserID);
+                        $filters = array(InviteCoachEntity::get_field_id('coachEmail') => $coachUser->user_email, 'created_by' => $clientUserID);
+
+                        $coachInviteEntity = $this->inviteCoachRepository->get_one($filters);
                         SMPLFY_Log::info("Coach invite entity: ", $coachInviteEntity);
 
                         if (!empty($coachInviteEntity)) {

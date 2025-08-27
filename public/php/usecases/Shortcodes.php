@@ -258,7 +258,7 @@ class Shortcodes
      * @param $atts
      * @return string|null
      */
-    function coach_clients_shortcode($atts): ?string
+    function coach_clients_shortcode($atts)
     {
         // Define default attributes and allow overrides
         $atts = shortcode_atts([
@@ -269,7 +269,9 @@ class Shortcodes
         $class = esc_attr($atts['class']);
         $form  = esc_attr($atts['form']);
 
-        $userID = get_current_user_id();
+        $userID           = get_current_user_id();
+        $user             = get_user_by('ID', $userID);
+        $currentUserEmail = $user->user_email;
 
         $args = [
             'meta_key'   => UserMetaKeys::COACH_USER_ID,
@@ -295,8 +297,13 @@ class Shortcodes
                     <tbody>
                     <?php foreach ($users as $u): ?>
                         <?php
-                        $coachInviteEntity = $this->inviteCoachRepository->get_one_for_user($u->ID);
+                        $filters = array(InviteCoachEntity::get_field_id('coachEmail') => $currentUserEmail, 'created_by' => $u->ID);
+
+
+                        $coachInviteEntity = $this->inviteCoachRepository->get_one($filters);
                         $abilities         = $coachInviteEntity->coachPermissions;
+
+                        SMPLFY_Log::info("Coach invite entry: ", $coachInviteEntity);
 
                         if ($abilities == 'View AND Edit') {
                             $shortcode = '[smplfy_get_switch_to_link user="' . $userID . '"]';

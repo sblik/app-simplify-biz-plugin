@@ -8,7 +8,7 @@ use WP_Error;
 
 /**
  *
- * @method static OperationsEntity|null get_one($fieldId, $value)
+ * @method static OperationsEntity|null get_one(array $filters, $direction = 'ASC')
  * @method static OperationsEntity|null get_one_by_id($value)
  * @method static OperationsEntity|null get_one_for_current_user()
  * @method static OperationsEntity|null get_one_for_user($userId)
