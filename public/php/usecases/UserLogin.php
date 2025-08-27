@@ -41,7 +41,7 @@ class UserLogin
             $mepr_user = new MeprUser($user->ID);
 
             if ($mepr_user->is_active_on_membership(Memberships::COACH)) {
-                return '/coach-view-operations/';
+                return '/coaching-hub/';
             } else {
                 return '/coach-pricing';
             }

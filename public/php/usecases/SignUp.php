@@ -54,7 +54,7 @@ class SignUp
         $mepr_user = new MeprUser(get_current_user_id());
 
         if ($mepr_user->is_active_on_membership(Memberships::COACH)) {
-            $redirect_url = 'http://app.simplifybiz.com/coach-view-operations/';
+            $redirect_url = 'http://app.simplifybiz.com/coaching-hub/';
         }
 
         return $redirect_url;
