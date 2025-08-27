@@ -67,3 +67,7 @@
 .smplfy-hidden {
     display: none !important;
 }
+
+.smplfy-center-heading {
+    text-align: center;
+}

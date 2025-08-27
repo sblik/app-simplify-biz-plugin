@@ -352,12 +352,16 @@ class Shortcodes
 
         $class = esc_attr($atts['class']);
 
-        $userID = get_current_user_id();
+        $currentUserID = get_current_user_id();
+        $queryUserID   = $_GET['client_id'];
 
-        $organisationName = UserMeta::retrieve_user_meta($userID, UserMetaKeys::ORGANISATION);
-
+        if (!empty($queryUserID)) {
+            $organisationName = UserMeta::retrieve_user_meta($queryUserID, UserMetaKeys::ORGANISATION);
+        } else {
+            $organisationName = UserMeta::retrieve_user_meta($currentUserID, UserMetaKeys::ORGANISATION);
+        }
         if (!empty($organisationName)) {
-            return '<h2>' . $organisationName . '</h2>';
+            return '<h2 class="smplfy-center-heading">' . $organisationName . '</h2>';
         } else {
             return null;
         }
