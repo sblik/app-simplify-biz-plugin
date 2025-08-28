@@ -291,7 +291,8 @@ class Shortcodes
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Organization</th>
+                        <th>Link to Entries</th>
                     </tr>
                     </thead>
                     <tbody>
