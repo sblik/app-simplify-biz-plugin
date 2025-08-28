@@ -313,6 +313,9 @@ class Shortcodes
                                 View Dashboard
                             </a>";
                         }
+
+                        $clientOrganisationName = UserMeta::retrieve_user_meta($u->ID, UserMetaKeys::ORGANISATION);
+
                         // Determine link target for the name
                         if ($atts['link_template'] === 'author') {
                             $href = get_author_posts_url($u->ID);
@@ -324,6 +327,9 @@ class Shortcodes
                         <tr>
                             <td>
                                 <?php echo esc_html($u->display_name ?: $u->user_nicename); ?>
+                            </td>
+                            <td>
+                                <?php echo $clientOrganisationName ?>
                             </td>
                             <td>
                                 <?php echo $output ?>
